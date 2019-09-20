@@ -83,6 +83,7 @@ const FixedHeader = styled(Container)`
     position: absolute;
     top:0;
     color: white;
+    max-width: none;
 `;
 
 const FixedHeaderInfo1 = styled(Container)`

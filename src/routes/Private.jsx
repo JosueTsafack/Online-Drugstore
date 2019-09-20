@@ -14,18 +14,18 @@ const Private = () => (
   <Screen key="Private" data-testid="PrivateWrapper">
     <Container verticalPadding>
       <Header>
-        <Heading>Oh hai!</Heading>
-        <Paragraph>
+        <Heading>S'inscrire</Heading>
+        {/* <Paragraph>
           You can get this boilerplate{' '}
           <Link href="https://github.com/gilbarbara/react-redux-saga-boilerplate/" target="_blank">
             here
           </Link>
-        </Paragraph>
+        </Paragraph> */}
       </Header>
       <Box textAlign="center" mb={4}>
-        <Heading as="h5">Here's some GitHub data</Heading>
+        <Heading as="h5">Inscrivez-vous et beneficiez des nombreux avantages qu'offre Swiftdrugs</Heading>
         <Text fontSize={1}>
-          <i>*Just to have some requests in the sagas...</i>
+          <i>Votre Pharmacie en ligne...</i>
         </Text>
       </Box>
       <Github />

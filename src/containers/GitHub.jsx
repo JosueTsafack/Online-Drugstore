@@ -177,7 +177,7 @@ export class GitHub extends React.Component {
               data-query="react"
               onClick={this.handleClick}
             >
-              React
+              Je suis une pharmacie
             </Button>
             <Button
               animate={query === 'redux' && github.repos.status === 'running'}
@@ -186,7 +186,7 @@ export class GitHub extends React.Component {
               data-query="redux"
               onClick={this.handleClick}
             >
-              Redux
+              Je suis un particulier
             </Button>
           </ButtonGroup>
         </Flex>
