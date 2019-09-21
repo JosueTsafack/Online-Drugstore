@@ -26,7 +26,7 @@
     "history": "^4.9.0",
     "immutability-helper": "^3.0.1",
     "lodash": "^4.17.14",
-    "mdbreact": "^4.19.2",
+    "mdbreact": "^4.20.0",
     "mobile-detect": "^1.4.3",
     "modernizr": "^3.7.1",
     "polished": "^3.4.1",

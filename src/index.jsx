@@ -8,6 +8,9 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import { store, persistor } from 'store/index';
 import { showAlert } from 'actions/index';
 
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import App from 'containers/App';
 import Loader from 'components/Loader';
 import Reload from 'components/Reload';

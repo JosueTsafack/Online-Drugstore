@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Container, Flex } from 'styled-minimal';
+import { Container, Flex, Group, Heading, Input, Button, Paragraph } from 'styled-minimal';
 
 import { appColor } from 'modules/theme';
 
-const FooterWrapper = styled.footer`
+import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+
+/* const Footer = styled.footer`
   border-top: 0.1rem solid #ddd;
-`;
+  background-color: #a5d6a7 green lighten-3;
+  color: black;
+`; */
 
 const FooterCopyright = styled(Container)`
   background-color: ${appColor};
@@ -15,30 +19,82 @@ const FooterCopyright = styled(Container)`
   height: 35px;
   color: white;
   padding-top: 8px;
+  max-width: none;
 
   a {
     color: white;
   }
 `;
 
-const Footer = () => (
-  <FooterWrapper>
-    <Container py={3}>
-      <Flex justifyContent="space-between">
-        <iframe
-          title="GitHub Stars"
-          src="https://ghbtns.com/github-btn.html?user=gilbarbara&repo=react-redux-saga-boilerplate&type=star&count=true"
-          frameBorder="0"
-          scrolling="0"
-          width="110px"
-          height="20px"
-        />
-      </Flex>
-    </Container>
-    <FooterCopyright>
-      &copy; {new Date().getFullYear()} Copyright:    <a href="https://www.MDBootstrap.com">Swiftdrugs Inc.</a>
-    </FooterCopyright> 
-  </FooterWrapper>
+const Footer = () => {
+  return (
+  <MDBFooter color= "#a5d6a7 green lighten-3" className="font-medium pt-4">
+      <MDBContainer fluid className="text-center text-md-left">
+      <MDBRow>
+        <MDBCol md="3">
+        <h5 className="title">Service de livraison</h5>
+        <p>
+              Here you can use rows and columns here to organize your footer
+              content. Here you can use rows and columns here to organize your footer
+              content.Here you can use rows and columns here to organize your footer
+              content.
+        </p>
+        </MDBCol>
+        <MDBCol md="2">
+        <h5 className="title">Plan de site</h5>
+            
+            <li className="list-unstyled">Categorie
+            </li>
+            <li className="list-unstyled">Categorie
+            </li>
+            <li className="list-unstyled">Categorie
+            </li>
+            <li className="list-unstyled">Categorie
+            </li>
+            <li className="list-unstyled">Categorie
+          </li>
+            
+        </MDBCol>
+        <MDBCol md="2">
+        <h5 className="title">Contactez nous</h5>
+            <ul>
+              <li className="list-unstyled">6xx xx xx xx
+              </li>
+              <li className="list-unstyled">6xx xx xx xx
+              </li>
+              <li className="list-unstyled">6xx xx xx xx
+              </li>
+              <li className="list-unstyled">
+              </li>
+            </ul>
+        </MDBCol>
+        <MDBCol md="3">
+        <h5 className="title">S'abonner a notre newsletter</h5>
+          <p>
+            Here you can use rows and columns here to organize your footer
+            content.
+          </p>
+          <form class="input-group">
+            <input type="text" class="form-control form-control-sm" placeholder="Your email"
+              aria-label="Votre e-mail" aria-describedby="basic-addon2"/>
+          </form>
+          <div class="input-group-append">
+              <button class="btn btn-sm btn-outline-white my-0" type="button">S'abonner</button>
+          </div>
+        </MDBCol>
+        <MDBCol md="2">
+        <h5 className="title">Mode de Paiement</h5>
+        <p>
+          Here you can use rows and columns here to organize your footer
+          content. 
+        </p>
+        </MDBCol>
+      </MDBRow>
+      </MDBContainer>
+        <FooterCopyright fluid>
+          &copy; {new Date().getFullYear()} Copyright: <a href="https://www.MDBootstrap.com"> Swiftdrugs Inc. </a>
+        </FooterCopyright>
+    </MDBFooter>
 );
-
+  }
 export default Footer;
