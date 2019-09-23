@@ -8,6 +8,7 @@ import { Box, Container, Heading, Link, Paragraph, Screen, Text, utils } from 's
 const Header = styled.div`
   margin-bottom: ${utils.spacer(3)};
   text-align: center;
+  padding: 100px 0 0;
 `;
 
 const Private = () => (

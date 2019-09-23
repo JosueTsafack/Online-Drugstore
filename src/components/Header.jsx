@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { appColor, headerHeight } from 'modules/theme';
 
+/* import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';     
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl'; */
+
+import { useState, useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
+
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 import { logOut } from 'actions';
 
 import { Container, utils } from 'styled-minimal';
@@ -25,7 +37,7 @@ const HeaderWrapper = styled.header`
   background-color: white;
   position: absolute;
   transition: all 2s ease;
-  top: 50px;
+  top: 45px;
 
   padding-left: 100px;
   padding-right: 100px;
@@ -116,6 +128,94 @@ const logoHeader = styled(Container)`
     float: left!important;
 `;
 
+
+
+export default function Header() {
+
+  const [isNavVisible, setNavVisibility] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 700px)");
+    mediaQuery.addListener(handleMediaQueryChange);
+    handleMediaQueryChange(mediaQuery);
+
+    return () => {
+      mediaQuery.removeListener(handleMediaQueryChange);
+    };
+  }, []);
+
+  const handleMediaQueryChange = mediaQuery => {
+    if (mediaQuery.matches) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+
+  const toggleNav = () => {
+    setNavVisibility(!isNavVisible);
+  };
+
+
+  /* handleClickLogout = () => {
+    const { dispatch } = this.props;
+
+    dispatch(logOut());
+  }; */
+
+  return (
+    <div>
+    <FixedHeader className="FixedHeader">
+        <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
+        <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
+        <FixedHeaderInfo3 className="FixedHeaderInfo3">+237 6xx xx xx xx</FixedHeaderInfo3>
+    </FixedHeader>
+
+    <header className="Header">
+     <HeaderWrapper className="animate">
+        <HeaderContainer>
+        <logoHeader>
+          <a href="/">
+            <Logo type="logo"/>
+          </a>
+
+          <a href="/">
+            <HeaderTitleWithLogo>Swiftdrugs</HeaderTitleWithLogo>
+          </a>
+        </logoHeader>
+
+          <CSSTransition
+        in={!isSmallScreen || isNavVisible}
+        timeout={350}
+        classNames="NavAnimation"
+        unmountOnExit
+      >
+        <nav className="Nav">
+          <a href="/">Home</a>
+          <a href="/">Articles</a>
+          <a href="/">About</a>
+          <button>Logout</button>
+        </nav>
+      </CSSTransition>
+
+        </HeaderContainer>
+      </HeaderWrapper>
+       
+      <button onClick={toggleNav} className="Burger">
+        🍔
+      </button>
+    </header>
+   </div>
+  );
+
+
+
+
+
+
+
+ /*
 export default class Header extends React.PureComponent {
 
   constructor() {
@@ -125,25 +225,11 @@ export default class Header extends React.PureComponent {
     }
  }
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  };
-
-  handleClickLogout = () => {
-    const { dispatch } = this.props;
-
-    dispatch(logOut());
-  };
-
-  render() {
-    return (
-      <div>
+  <div>
       {this.state.FixedHeader ? <FixedHeader className="FixedHeader">
-      <ul>
-        <FixedHeaderInfo1>Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
-        <FixedHeaderInfo2>Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
-        <FixedHeaderInfo3>+237 6xx xx xx xx</FixedHeaderInfo3>
-      </ul>
+        <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
+        <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
+        <FixedHeaderInfo3 className="FixedHeaderInfo3">+237 6xx xx xx xx</FixedHeaderInfo3>
       </FixedHeader> : null }
       <HeaderWrapper className={`showHeader${this.state.FixedHeader ? ' animate' : ''}`}>
         <HeaderContainer>
@@ -163,7 +249,34 @@ export default class Header extends React.PureComponent {
           </Logout>
         </HeaderContainer>
       </HeaderWrapper>
-      </div>
+      </div> */
+
+  /* static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  handleClickLogout = () => {
+    const { dispatch } = this.props;
+
+    dispatch(logOut());
+  };
+  render() {
+    return (
+      <UncontrolledDropdown>
+        <DropdownToggle caret>
+          Dropdown
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem header>Header</DropdownItem>
+          <DropdownItem disabled>Action</DropdownItem>
+          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>Another Action</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     );
-  }
+  } */
+
+
+
 }

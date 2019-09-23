@@ -18,6 +18,7 @@
     "ES6"
   ],
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "classlist-polyfill": "^1.2.0",
     "classnames": "^2.2.6",
     "ease-component": "^1.0.0",
@@ -25,6 +26,7 @@
     "fbjs": "^1.0.0",
     "history": "^4.9.0",
     "immutability-helper": "^3.0.1",
+    "latest": "^0.2.0",
     "lodash": "^4.17.14",
     "mdbreact": "^4.20.0",
     "mobile-detect": "^1.4.3",
@@ -37,9 +39,11 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-inlinesvg": "^0.8.4",
+    "react-overlays": "^1.2.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-transition-group": "^4.2.1",
+    "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
     "redux-immutable-state-invariant": "^2.1.0",
