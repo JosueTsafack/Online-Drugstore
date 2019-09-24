@@ -8,14 +8,22 @@ import { Box, Container, Heading, Link, Paragraph, Screen, Text, utils } from 's
 const Header = styled.div`
   margin-bottom: ${utils.spacer(3)};
   text-align: center;
-  padding: 100px 0 0;
+  /* padding: 100px 0 0; */ font-size: 32px;
+`;
+
+Screen = styled(Screen)`
+  ${/* sc-custom '@media-query' */ utils.responsive({
+    0: `
+    padding: 60px 0 0;
+    `,
+  })};
 `;
 
 const Private = () => (
   <Screen key="Private" data-testid="PrivateWrapper">
     <Container verticalPadding>
       <Header>
-        <Heading>S'inscrire</Heading>
+        <Heading className="Heading">S'inscrire</Heading>
         {/* <Paragraph>
           You can get this boilerplate{' '}
           <Link href="https://github.com/gilbarbara/react-redux-saga-boilerplate/" target="_blank">

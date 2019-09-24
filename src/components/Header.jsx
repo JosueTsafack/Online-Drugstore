@@ -96,6 +96,7 @@ const FixedHeader = styled(Container)`
     top:0;
     color: white;
     max-width: none;
+    text-align: center;
 `;
 
 const FixedHeaderInfo1 = styled(Container)`
@@ -121,6 +122,7 @@ const HeaderTitleWithLogo = styled(Container)`
     margin-left: 90px;
     font-size: 36px;
     font-weight: 600;
+    padding-left: 16px!important;
 `;
 
 const logoHeader = styled(Container)`
@@ -175,36 +177,55 @@ export default function Header() {
     <header className="Header">
      <HeaderWrapper className="animate">
         <HeaderContainer>
-        <logoHeader>
+        <logoHeader className="logoHeader">
           <a href="/">
             <Logo type="logo"/>
           </a>
 
           <a href="/">
-            <HeaderTitleWithLogo>Swiftdrugs</HeaderTitleWithLogo>
+            <HeaderTitleWithLogo className="HeaderTitleWithLogo">Swiftdrugs</HeaderTitleWithLogo>
           </a>
         </logoHeader>
-
-          <CSSTransition
-        in={!isSmallScreen || isNavVisible}
-        timeout={350}
-        classNames="NavAnimation"
-        unmountOnExit
-      >
+    <div>
+    <UncontrolledDropdown>
+          <DropdownToggle caret>
+            Categories
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem header>Header</DropdownItem>
+            <DropdownItem disabled>Action</DropdownItem>
+            <DropdownItem>Another Action</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>Another Action</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+        
+        <CSSTransition
+          in={!isSmallScreen || isNavVisible}
+          timeout={350}
+          classNames="NavAnimation"
+          unmountOnExit>
+          
         <nav className="Nav">
-          <a href="/">Home</a>
-          <a href="/">Articles</a>
-          <a href="/">About</a>
-          <button>Logout</button>
+          <a href="/">Accueil</a>
+          <a href="/">A propos</a>
+          <a href="/">Nos Services</a>
+          <a href="/">Contactes</a>
+          <a href="/">nos partenaires</a>
+          <a href="/">Mentions Legales</a>
+          <Logout>
+            <span>logout</span>
+            <Icon name="sign-out" width={16} />
+        </Logout>
         </nav>
-      </CSSTransition>
-
-        </HeaderContainer>
-      </HeaderWrapper>
-       
-      <button onClick={toggleNav} className="Burger">
+        </CSSTransition>
+        <button onClick={toggleNav} className="Burger">
         🍔
       </button>
+      </div>
+        </HeaderContainer>
+      </HeaderWrapper>
+
     </header>
    </div>
   );

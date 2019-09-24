@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   svg {
     max-height: 100%;
     width: auto;
-    font-size: 7.25em!important;
+    font-size: 6.25em!important;
     margin-top: -36px;
   }
 `;

@@ -64,29 +64,113 @@ align-text: middle;
 }
 
 
-@media only screen and (max-width: 0) and (min-width: 546px) {
+@media (max-width: 546px) {
   .FixedHeaderInfo1 {
     overflow: auto;
     padding-bottom:48px;
-  }
+  } 
 
-  .FixedHeaderInfo2 {
-    overflow: auto;
-  }
-
-  .FixedHeaderInfo3 {
-    overflow: auto;
-    padding-bottom: 73px;
-  }
-}
-
-@media only screen and (max-width: 546px) and (min-width: 768px) {
   .FixedHeaderInfo2 {
     overflow: auto;
     padding-bottom: 24px;
   }
 
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 72px;
+  }
 }
+
+@media only screen and (min-width: 546px) and (max-width: 768px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom:48px;
+  } 
+
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 48px;
+  }
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 72px;
+  }
+}
+
+@media only screen and (min-width: 799px) and (max-width: 834px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom: 72px; 
+  } 
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 48px;
+  }
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 72px;
+  } 
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1265px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom: 41px;
+  } 
+
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 41px;
+  }
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 65px;
+  } 
+}
+
+@media only screen and (min-width: 1265px) and (max-width: 1303px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom: 65px;
+  } 
+
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 41px;
+  }
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 65px;
+  } 
+}
+
+@media only screen and (min-width: 1303px) and (max-width: 1700px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom: 115px;
+  } 
+
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 115px;
+  } 
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 115px;
+  }
+}
+
+${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 24px;
+  }
+} */}
 
 @media (max-width: 576px) {
   .FixedHeader {
@@ -117,7 +201,10 @@ align-text: middle;
   }
 } 
 
-
+.Heading {
+  font-size: 32px;
+}
+  
 
 
 
@@ -233,7 +320,20 @@ align-text: middle;
 }
 
 
+@media (max-width: 1023px) {
+  .logoHeader {
+    margin-left: -112px;
+  }
 
+  .HeaderTitleWithLogo {
+    margin-left: 82px;
+    font-size: 28px;
+  }
+
+  .Nav {
+    margin-right: -108px;
+  }
+}
 
 
 
