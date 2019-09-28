@@ -210,43 +210,25 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
 
 
 
-.Header {
-  /* position: fixed;
-  top: 0; Stick it to the top
-  max-height: 70px;
-  width: 100vw; */
 
-  display: grid;
-  grid-template-areas: "logo nav";
-
-  /* Cosmetics */
-  background-color: #282c34;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.Logo {
-  grid-area: logo;
-  height: 70px;
-}
-
-.Nav {
+#top {
   display: grid;
   grid-area: nav;
   grid-template-columns: repeat(4, auto);
   align-items: center;
   justify-items: center;
 }
-.Nav a {
+#top a {
   ${'' /* color: #fff; */}
   font-size: 20px;
   font-weight: 500;
   transition: 0.5s;
   text-decoration: none;
 }
-.Nav a:hover {
+#top a:hover {
   transform: scale(1.1);
 }
-.Nav button {
+#top button {
   padding: 10px;
   outline: none;
   border: none;
@@ -260,7 +242,7 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   transition: 70ms;
 }
 
-.Nav button:active {
+#top button:active {
   transform: translateY(3px);
   box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.25);
 }
@@ -285,7 +267,7 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   .Header {
     grid-template-areas: "logo burger" "nav nav";
   }
-  .Nav {
+  #top {
     grid-template-rows: repeat(4, auto);
     grid-template-columns: none;
     grid-row-gap: 20px;
@@ -326,14 +308,33 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   }
 
   .HeaderTitleWithLogo {
-    margin-left: 82px;
+    margin-left: -39px;
     font-size: 28px;
+    margin-top: -74px;
   }
 
-  .Nav {
+  #top {
     margin-right: -108px;
   }
 }
+
+$lighter: #373940; // light blue
+$dark: #282c34; // dark blue
+$darker: #20232a; // really dark blue
+$brand: #61dafb; // electric blue
+$brand-light: #bbeffd;
+$text: #1a1a1a; // very dark grey / black substitute
+$subtle: #6d6d6d; // light grey for text
+$subtle-on-dark: #999;
+$divider: #ececec; // very light grey
+$note: #ffe564; // yellow
+$error: #ff6464; // yellow
+$white: #ffffff;
+$black: #000000;
+
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
 
 
 

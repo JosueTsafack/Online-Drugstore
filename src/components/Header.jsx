@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { appColor, headerHeight } from 'modules/theme';
 
-/* import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';     
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl'; */
-
 import { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+/*import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'; */
 
-import { logOut } from 'actions';
+/* import { logOut } from 'actions'; */
 
 import { Container, utils } from 'styled-minimal';
 import Icon from 'components/Icon';
@@ -118,7 +118,7 @@ const FixedHeaderInfo3 = styled(Container)`
 `;
 
 const HeaderTitleWithLogo = styled(Container)`
-    margin-top: -90px;
+        margin-top: -78px;
     margin-left: 90px;
     font-size: 36px;
     font-weight: 600;
@@ -132,6 +132,109 @@ const logoHeader = styled(Container)`
 
 
 
+
+const StyledNavbar = styled(Navbar).attrs({
+  as: 'header',
+  variant: 'dark',
+  role: 'banner',
+})`
+  @import '../../assets/css/theme.scss';
+  min-height: 4rem;
+  background-color: $darker;
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+  }
+`;
+
+const SkipToContentLink = styled('a')`
+  composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
+`;
+
+const StyledNavLink = styled(Nav.Link)`
+  @import '../../assets/css/theme.scss';
+  & + & {
+    margin-left: $spacer;
+  }
+  &:global(.active) {
+    font-width: 700;
+  }
+`;
+
+
+const NAV_LINKS = [
+  {
+    link: '/',
+    title: 'Accueil',
+    exact: true,
+  },
+  {
+    link: '/getting-started/introduction',
+    title: 'Nos partenaires',
+  },
+  {
+    link: '/components/alerts',
+    title: 'Contactes',
+  },
+  ,
+  {
+    link: '/components/alerts',
+    title: 'Blog',
+  },
+];
+
+const propTypes = {
+  activePage: PropTypes.string,
+};
+
+function Header({ activePage }) {
+  return (
+    <div>
+    <FixedHeader className="FixedHeader">
+        <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
+        <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
+        <FixedHeaderInfo3 className="FixedHeaderInfo3">+237 6xx xx xx xx</FixedHeaderInfo3>
+    </FixedHeader>
+    <header className="Header">
+     <HeaderWrapper className="animate">
+        <HeaderContainer>
+          <StyledNavbar expand collapseOnSelect>
+          <Navbar.Brand href="/">
+            <logoHeader className="logoHeader">
+              <Logo type="logo"/>
+              <HeaderTitleWithLogo className="HeaderTitleWithLogo">Swiftdrugs</HeaderTitleWithLogo>
+            </logoHeader>
+          </Navbar.Brand>
+          <Nav role="navigation" id="top" className="d-flex d-md-flex">
+            {NAV_LINKS.map(({ link, title, exact }) => (
+              <StyledNavLink
+                key={link}
+                href={link}
+                active={exact ? activePage === link : link}
+                /*active={exact ? activePage === link : activePage.startsWith(link)}*/
+              >
+                {title}
+              </StyledNavLink>
+            ))}
+          </Nav>
+        </StyledNavbar>
+        </HeaderContainer>
+      </HeaderWrapper>
+    </header>
+    </div>
+  );
+}
+
+Header.propTypes = propTypes;
+
+export default Header;
+
+
+
+
+
+/* 
 export default function Header() {
 
   const [isNavVisible, setNavVisibility] = useState(false);
@@ -157,79 +260,7 @@ export default function Header() {
 
   const toggleNav = () => {
     setNavVisibility(!isNavVisible);
-  };
-
-
-  /* handleClickLogout = () => {
-    const { dispatch } = this.props;
-
-    dispatch(logOut());
   }; */
-
-  return (
-    <div>
-    <FixedHeader className="FixedHeader">
-        <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
-        <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
-        <FixedHeaderInfo3 className="FixedHeaderInfo3">+237 6xx xx xx xx</FixedHeaderInfo3>
-    </FixedHeader>
-
-    <header className="Header">
-     <HeaderWrapper className="animate">
-        <HeaderContainer>
-        <logoHeader className="logoHeader">
-          <a href="/">
-            <Logo type="logo"/>
-          </a>
-
-          <a href="/">
-            <HeaderTitleWithLogo className="HeaderTitleWithLogo">Swiftdrugs</HeaderTitleWithLogo>
-          </a>
-        </logoHeader>
-    <div>
-    <UncontrolledDropdown>
-          <DropdownToggle caret>
-            Categories
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem header>Header</DropdownItem>
-            <DropdownItem disabled>Action</DropdownItem>
-            <DropdownItem>Another Action</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Another Action</DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-        
-        <CSSTransition
-          in={!isSmallScreen || isNavVisible}
-          timeout={350}
-          classNames="NavAnimation"
-          unmountOnExit>
-          
-        <nav className="Nav">
-          <a href="/">Accueil</a>
-          <a href="/">A propos</a>
-          <a href="/">Nos Services</a>
-          <a href="/">Contactes</a>
-          <a href="/">nos partenaires</a>
-          <a href="/">Mentions Legales</a>
-          <Logout>
-            <span>logout</span>
-            <Icon name="sign-out" width={16} />
-        </Logout>
-        </nav>
-        </CSSTransition>
-        <button onClick={toggleNav} className="Burger">
-        🍔
-      </button>
-      </div>
-        </HeaderContainer>
-      </HeaderWrapper>
-
-    </header>
-   </div>
-  );
-
 
 
 
@@ -297,7 +328,4 @@ export default class Header extends React.PureComponent {
       </UncontrolledDropdown>
     );
   } */
-
-
-
-}
+/* } */
