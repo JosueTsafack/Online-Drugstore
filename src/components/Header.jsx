@@ -141,6 +141,7 @@ const StyledNavbar = styled(Navbar).attrs({
   @import '../../assets/css/theme.scss';
   min-height: 4rem;
   background-color: $darker;
+  width: 100%;
   @include media-breakpoint-up(md) {
     position: sticky;
     top: 0;

@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import Github from 'containers/GitHub';
 
 import { Box, Container, Heading, Link, Paragraph, Screen, Text, utils } from 'styled-minimal';
+import DeliveryImage from 'components/DeliveryImage';  
+/* import { DeliveryImage } from '../../assets/media/images/banniere.png'; */
+
+// console.log(DeliveryImage);
 
 const Header = styled.div`
   margin-bottom: ${utils.spacer(3)};
@@ -38,6 +42,14 @@ const Private = () => (
         </Text>
       </Box>
       <Github />
+    </Container>
+    <Container verticalPadding>
+      <Box textAlign="left" mb={4}>
+          <Heading className="DeliveryImageHeading" as="h3">Votre service de livraison a domicile</Heading>
+      </Box>
+      <DeliveryImage />
+      {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" />
+      <img src='C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\banniere.png' alt="DeliveryImage" />; */}
     </Container>
   </Screen>
 );

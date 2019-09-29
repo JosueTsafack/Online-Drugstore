@@ -212,14 +212,9 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
 
 
 #top {
-  display: grid;
-  grid-area: nav;
-  grid-template-columns: repeat(4, auto);
-  align-items: center;
-  justify-items: center;
+  float:right;
 }
 #top a {
-  ${'' /* color: #fff; */}
   font-size: 20px;
   font-weight: 500;
   transition: 0.5s;
@@ -268,15 +263,17 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
     grid-template-areas: "logo burger" "nav nav";
   }
   #top {
-    grid-template-rows: repeat(4, auto);
-    grid-template-columns: none;
-    grid-row-gap: 20px;
-
-    padding: 30px 0 30px;
-    background: rgba(40, 44, 47, 0.95);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+        /* grid-template-rows: repeat(4,auto); */
+    /* grid-template-columns: none; */
+    /* grid-row-gap: 20px; */
+    /* margin-right: -112px; */
+    padding: 0px -1px 0px;
+    /* background: rgba(40,44,47,0.95); */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* border-bottom-left-radius: 10px; */
+    /* border-bottom-right-radius: 10px; */
+    margin-left: -54px;
+    margin-top: 9px;
   }
   .Burger {
     display: inline;
@@ -316,6 +313,19 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   #top {
     margin-right: -108px;
   }
+}
+
+.DeliveryImage {
+  background-image: url(../../assets/media/images/banniere.png);
+}
+
+.DeliveryImageHeading {
+  color: #03a650;
+}
+
+.hcZIKI svg {
+    width: 10em!important;
+    heigth: 2em!important;
 }
 
 $lighter: #373940; // light blue

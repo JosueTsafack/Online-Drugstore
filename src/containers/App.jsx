@@ -45,6 +45,11 @@ const Main = styled.main`
   min-height: 100vh;
 
   ${MainPrivate};
+
+  @media (max-width: 700px) {
+    padding: 126px 0 0;
+  }
+  
 `;
 
 export class App extends React.Component {
