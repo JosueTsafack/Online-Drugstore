@@ -258,26 +258,37 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   transform: scale(1.2);
 }
 
-@media (max-width: 700px) {
+@media only screen and (min-width: 650px) and (max-width: 704px) {
   .Header {
     grid-template-areas: "logo burger" "nav nav";
   }
   #top {
-        /* grid-template-rows: repeat(4,auto); */
-    /* grid-template-columns: none; */
-    /* grid-row-gap: 20px; */
-    /* margin-right: -112px; */
     padding: 0px -1px 0px;
-    /* background: rgba(40,44,47,0.95); */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    /* border-bottom-left-radius: 10px; */
-    /* border-bottom-right-radius: 10px; */
+    ${'' /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */}
     margin-left: -54px;
-    margin-top: 9px;
+    margin-top: -5px;
   }
   .Burger {
     display: inline;
   }
+}
+@media only screen and (min-width: 0px) and (max-width: 650px) {
+  .Header {
+    grid-template-areas: "logo burger" "nav nav";
+  }
+  #top {
+    padding: 0px -1px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-left: -54px;
+    margin-top: 15px;
+  }
+  .Burger {
+    display: inline;
+  }
+}
+
+@media (max-width: 638px) {
+  
 }
 
 .NavAnimation-enter {
