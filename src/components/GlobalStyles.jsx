@@ -334,11 +334,104 @@ ${'' /* @media only screen and (min-width: 546px) and (max-width: 768px) {
   color: #03a650;
 }
 
-.hcZIKI svg {
-    width: 10em!important;
-    heigth: 2em!important;
+
+
+/* Button */
+.demo-button {
+    -webkit-transition: .2s;
+    transition: .2s;
+    display: block;
+    width: 100%;
+    font-size: .875rem;
+    font-weight: 700;
+    padding: .75rem 1rem;
+    background-color: transparent;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-style: solid;
+    border-color: #e2e8f0;
+}
+.demo-button.is-primary {
+    background-color: #4299e1;
+    color: #fff;
+    border-style: none;
 }
 
+.demo-button:disabled {
+    opacity: .25;
+    pointer-events: none;
+}
+
+/* Label */
+.demo-label {
+    display: block;
+    font-weight: 700;
+    font-size: .875rem;
+    color: #718096;
+    margin-bottom: .25rem;
+}
+
+/* Input */
+.demo-input {
+    font-size: 1rem;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #e2e8f0;
+    border-radius: .25rem;
+    padding: .25rem .5rem;
+    display: block;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    line-height: 1.5;
+}
+
+/* Form feedback */
+.demo-form-feedback {
+    display: block;
+    font-size: .875rem;
+    color: #718096;
+    margin-top: .25rem;
+}
+.is-error .demo-form-feedback {
+    color: #e53e3e;
+}
+
+.demo-form__content {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+/* Form Group */
+.demo-form-group {
+    margin-bottom: 1rem;
+}
+
+/* Form */
+.demo-form {
+    flex-direction: column;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #edf2f7;
+    border-radius: .5rem;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+    overflow: hidden;
+}
+
+.is-error .demo-input {
+    border-color: #e53e3e;
+}
+
+.demo-form__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f7fafc;
+    margin-top: auto;
+}
 $lighter: #373940; // light blue
 $dark: #282c34; // dark blue
 $darker: #20232a; // really dark blue

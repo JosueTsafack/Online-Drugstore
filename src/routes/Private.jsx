@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Github from 'containers/GitHub';
+/* import Github from 'containers/GitHub'; */
+import PharmacyForm from 'containers/PharmacyForm';
 
 import { Box, Container, Heading, Link, Paragraph, Screen, Text, utils } from 'styled-minimal';
 import DeliveryImage from 'components/DeliveryImage';  
@@ -41,7 +42,9 @@ const Private = () => (
           <i>Votre Pharmacie en ligne...</i>
         </Text>
       </Box>
-      <Github />
+      {/* <Github /> */}
+      <PharmacyForm />
+      
     </Container>
     <Container verticalPadding>
       <Box textAlign="left" mb={4}>

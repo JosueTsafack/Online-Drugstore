@@ -18,6 +18,8 @@
     "ES6"
   ],
   "dependencies": {
+    "@formiz/core": "^1.0.0-alpha.12",
+    "@formiz/validations": "^1.0.0-alpha.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",

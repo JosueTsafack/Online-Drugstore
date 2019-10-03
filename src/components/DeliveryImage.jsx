@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     font-size: 7.25em!important;
     margin-top: -34px;
     width:10em!important;
-    heigth:2em!important;
+    height:2em!important;
   }
 `;
 
