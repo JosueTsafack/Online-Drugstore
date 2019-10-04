@@ -29,81 +29,8 @@ import { Formiz } from '@formiz/core'
 const { responsive, spacer } = utils;
 const { grays } = theme;
 
-const GitHubGrid = styled.ul`
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: ${spacer(2)};
-  grid-template-columns: 100%;
-  list-style: none;
-  margin: ${spacer(4)} auto 0;
-  padding: 0;
-  /* stylelint-disable */
-  ${/* istanbul ignore next */ p =>
-        responsive({
-            ix: `
-        grid-gap: ${spacer(3)(p)};
-        width: 90%;
-      `,
-            md: `
-        grid-template-columns: repeat(2, 1fr);
-        width: 100%;
-      `,
-            lg: `
-        grid-template-columns: repeat(3, 1fr);
-      `,
-            xl: `
-        grid-gap: ${spacer(4)(p)};
-        grid-template-columns: repeat(4, 1fr);
-      `,
-        })};
-  /* stylelint-enable */
-
-  > li {
-    display: flex;
-  }
-`;
-
-const Item = styled(Link)`
-  align-items: center;
-  border: solid 0.1rem ${appColor};
-  border-radius: 0.4rem;
-  overflow: hidden;
-  padding: ${spacer(3)};
-  text-align: center;
-  width: 100%;
-  /* stylelint-disable */
-  ${/* istanbul ignore next */ p =>
-        responsive({
-            md: `
-        padding: ${spacer(3)(p)};
-      `,
-            lg: `
-        padding: ${spacer(4)(p)};
-      `,
-        })};
-  /* stylelint-enable */
-
-  p {
-    color: #000;
-  }
-
-  img {
-    height: 8rem;
-    margin-bottom: ${spacer(2)};
-  }
-`;
-
-const ItemHeader = styled.div`
-  margin-bottom: ${spacer(3)};
-
-  small {
-    color: ${grays.gray60};
-  }
-`;
 
 export class PharmacyForm extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -233,19 +160,15 @@ export class PharmacyForm extends React.Component {
                             label="Localisation"
                         />
                         <MyField
-                            name="téléphone WhatsApp"
-                            label="téléphone WhatsApp"
+                            name="Téléphone"
+                            label="Téléphone"
                         />
                         <MyField
-                            name="boîte postale"
-                            label="boîte postale"
+                            name="Adresse"
+                            label="Adresse"
                         /> 
                         <MyField
-                            name="fax"
-                            label="fax"
-                        />                  
-                        <MyField
-                            name="email"
+                            name="Email"
                             label="Email"
                             type="email"
                             isRequired="Email is required"
@@ -273,22 +196,6 @@ export class PharmacyForm extends React.Component {
                             name="Contact du promoteur"
                             label="Contact du promoteur"
                         />
-                        <MyField
-                            name="password"
-                            label="Password"
-                            type="password"
-                        />
-                        <MyField
-                            name="passwordConfirm"
-                            label="Confirm password"
-                            type="password"
-                            // validations={[
-                            //     {
-                            //         rule: (value, values) => values.password === value,
-                            //         message: 'Passwords do not match',
-                            //     }
-                            // ]}
-                        />
                     </div>
                     <div className="demo-form__footer">
                         <div
@@ -300,7 +207,7 @@ export class PharmacyForm extends React.Component {
                                 type="submit"
                                 // disabled={isLoading || (!form.isValid && form.isSubmitted)}
                             >
-                            Submit
+                            S'inscrire
                                 {/* {isLoading ? 'Loading...' : 'Submit'} */}
                             </button>
                         </div>
@@ -326,15 +233,15 @@ export class PharmacyForm extends React.Component {
                             label="Prenom"
                         />
                         <MyField
-                            name="téléphone WhatsApp"
-                            label="téléphone WhatsApp"
+                            name="Téléphone"
+                            label="Téléphone"
                         />
                         <MyField
-                            name="boîte postale"
-                            label="boîte postale"
+                            name="Adresse"
+                            label="Adresse"
                         /> 
                         <MyField
-                            name="email"
+                            name="Email"
                             label="Email"
                             type="email"
                             isRequired="Email is required"
@@ -345,7 +252,7 @@ export class PharmacyForm extends React.Component {
                             //     }
                             // ]}
                         />
-                        <MyField
+                        {/* <MyField
                             name="password"
                             label="Password"
                             type="password"
@@ -354,13 +261,13 @@ export class PharmacyForm extends React.Component {
                             name="passwordConfirm"
                             label="Confirm password"
                             type="password"
-                            // validations={[
-                            //     {
-                            //         rule: (value, values) => values.password === value,
-                            //         message: 'Passwords do not match',
-                            //     }
-                            // ]}
-                        />
+                            validations={[
+                                {
+                                    rule: (value, values) => values.password === value,
+                                    message: 'Passwords do not match',
+                                }
+                            ]}
+                        /> */}
                     </div>
                     <div className="demo-form__footer">
                         <div

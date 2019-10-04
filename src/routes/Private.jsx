@@ -13,7 +13,23 @@ import DeliveryImage from 'components/DeliveryImage';
 const Header = styled.div`
   margin-bottom: ${utils.spacer(3)};
   text-align: center;
-  /* padding: 100px 0 0; */ font-size: 32px;
+  font-size: 32px;
+`;
+
+const BoxHeader = styled.div`
+  margin-bottom: ${utils.spacer(3)};
+  font-size: 32px;
+  background-color: #4caf50;
+  color: white;
+  height: 350px;
+  margin-top: -15px;
+`;
+
+const BoxHeading = styled.div`
+  width: 350px;
+  width: 400px;
+  margin-left: 148px;
+  padding-top: 35px;
 `;
 
 Screen = styled(Screen)`
@@ -26,7 +42,17 @@ Screen = styled(Screen)`
 
 const Private = () => (
   <Screen key="Private" data-testid="PrivateWrapper">
-    <Container verticalPadding>
+    <BoxHeader mb={4}>
+      <BoxHeading textAlign="center" mb={4}>
+        <Heading as="h1">Premiere pharmacie en ligne au Cameroun</Heading>
+        <Text fontSize={4}>
+          Cliquez, Commander et faites-vous livrer
+        </Text>
+      </BoxHeading>
+      {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" /> */}
+      {/* C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\Homepage-image.jpg */}
+    </BoxHeader>
+    <Container id="HeaderIntro" verticalPadding>
       <Header>
         <Heading className="Heading">S'inscrire</Heading>
         {/* <Paragraph>
@@ -42,17 +68,14 @@ const Private = () => (
           <i>Votre Pharmacie en ligne...</i>
         </Text>
       </Box>
-      {/* <Github /> */}
       <PharmacyForm />
-      
     </Container>
+
     <Container verticalPadding>
       <Box textAlign="left" mb={4}>
           <Heading className="DeliveryImageHeading" as="h3">Votre service de livraison a domicile</Heading>
-      </Box>
+      </Box> 
       <DeliveryImage />
-      {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" />
-      <img src='C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\banniere.png' alt="DeliveryImage" />; */}
     </Container>
   </Screen>
 );

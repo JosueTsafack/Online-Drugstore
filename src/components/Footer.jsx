@@ -28,7 +28,7 @@ const FooterCopyright = styled(Container)`
 
 const Footer = () => {
   return (
-  <MDBFooter color= "#a5d6a7 green lighten-3" className="font-medium pt-4">
+  <MDBFooter color= "green" className="font-medium pt-4">
       <MDBContainer fluid className="text-center text-md-left">
       <MDBRow>
         <MDBCol md="3">
