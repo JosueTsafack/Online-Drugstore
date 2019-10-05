@@ -32,46 +32,35 @@ const Footer = () => {
       <MDBContainer fluid className="text-center text-md-left">
       <MDBRow>
         <MDBCol md="3">
-        <h5 className="title">Service de livraison</h5>
+        <h2 className="title">Service de livraison</h2>
         <p>
               Here you can use rows and columns here to organize your footer
               content. Here you can use rows and columns here to organize your footer
-              content.Here you can use rows and columns here to organize your footer
-              content.
+              content
         </p>
         </MDBCol>
         <MDBCol md="2">
-        <h5 className="title">Plan de site</h5>
+        <h2 className="title">Plan de site</h2>
             
             <li className="list-unstyled">Conditions d'utilisation generales
             </li>
             <li className="list-unstyled">Categorie
             </li>
-            <li className="list-unstyled">Categorie
-            </li>
             
         </MDBCol>
         <MDBCol md="2">
-        <h5 className="title">Contactez nous</h5>
-            <ul>
-              <li className="list-unstyled">6xx xx xx xx
-              </li>
-              <li className="list-unstyled">6xx xx xx xx
-              </li>
-              <li className="list-unstyled">6xx xx xx xx
-              </li>
-              <li className="list-unstyled">
-              </li>
-            </ul>
+        <h2 className="title">Contactez nous</h2>
+            <li className="list-unstyled">6xx xx xx xx
+            </li>
         </MDBCol>
         <MDBCol md="3">
-        <h5 className="title">S'abonner a notre newsletter</h5>
+        <h2 className="title">S'abonner a notre newsletter</h2>
           <p>
             Here you can use rows and columns here to organize your footer
             content.
           </p>
           <form class="input-group">
-            <input type="text" class="form-control form-control-sm" placeholder="Your email"
+            <input type="text" class="form-control form-control-sm" placeholder="Entrez votre e-mail"
               aria-label="Votre e-mail" aria-describedby="basic-addon2"/>
           </form>
           <div class="input-group-append">
@@ -79,7 +68,7 @@ const Footer = () => {
           </div>
         </MDBCol>
         <MDBCol md="2">
-        <h5 className="title">Modes de Paiements</h5>
+        <h2 className="title">Modes de Paiements</h2>
         <p>
           Ici seront affiche nos modes de paiements 
         </p>

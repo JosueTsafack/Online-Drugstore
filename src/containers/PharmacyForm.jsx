@@ -279,7 +279,7 @@ export class PharmacyForm extends React.Component {
                                 type="submit"
                                 // disabled={isLoading || (!form.isValid && form.isSubmitted)}
                             >
-                            Submit
+                            S'inscrire
                                 {/* {isLoading ? 'Loading...' : 'Submit'} */}
                             </button>
                         </div>

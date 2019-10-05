@@ -204,12 +204,40 @@ a:hover {
 }
 
 #HeaderIntro {
-  background-color: #EDEDED;
+  ${'' /* background-color: #EDEDED; */}
+  background-color: white;
   margin-top: -16px;
 }
-  
 
+.btn.btn-sm.btn-outline-white.my-0 {
+  font-size: 16px
+}
 
+.input-group-append {
+  margin-top: 7px;
+  margin-bottom: 14px;
+}
+
+.form-control.form-control-sm {
+  max-width: 100%;
+  -ms-flex-align: center;
+  padding: 8px 16px;
+  border: none;
+  border-bottom: solid 1px #b3b3b3;
+  -webkit-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  font-family: lato,sans-serif;
+  border-radius: 8px !important;
+  height: 30px;
+  font-size: 17px;
+}
+
+.headerImage {
+    ${'' /* background: url(https://avatars1.githubusercontent.com/u/182219?v=4); */}
+    ${'' /* background: url("../../assets/media/images/Homepage-image.jpg"); */}
+    background-image: url("https://avatars1.githubusercontent.com/u/182219?v=4");
+    height: 350px;
+}
 
 
 
@@ -267,7 +295,6 @@ a:hover {
   }
   #top {
     padding: 0px -1px 0px;
-    ${'' /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */}
     margin-left: -54px;
     margin-top: -5px;
   }

@@ -28,8 +28,12 @@ const BoxHeader = styled.div`
 const BoxHeading = styled.div`
   width: 350px;
   width: 400px;
-  margin-left: 148px;
+  margin-left: 50px;
   padding-top: 35px;
+
+  @media (min-width: 600px) {
+    margin-left: 148px;
+  }
 `;
 
 Screen = styled(Screen)`
@@ -43,14 +47,17 @@ Screen = styled(Screen)`
 const Private = () => (
   <Screen key="Private" data-testid="PrivateWrapper">
     <BoxHeader mb={4}>
+    
+      {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" /> */}
+      {/* C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\Homepage-image.jpg */}
+      <div className="headerImage"> 
       <BoxHeading textAlign="center" mb={4}>
         <Heading as="h1">Premiere pharmacie en ligne au Cameroun</Heading>
         <Text fontSize={4}>
-          Cliquez, Commander et faites-vous livrer
+          Cliquez, Commander et faites-vous livrer a domicile
         </Text>
       </BoxHeading>
-      {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" /> */}
-      {/* C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\Homepage-image.jpg */}
+      </div>
     </BoxHeader>
     <Container id="HeaderIntro" verticalPadding>
       <Header>

@@ -176,7 +176,7 @@ const NAV_LINKS = [
   },
   {
     link: '/components/alerts',
-    title: 'Contactes',
+    title: 'Contact',
   },
   ,
   {
