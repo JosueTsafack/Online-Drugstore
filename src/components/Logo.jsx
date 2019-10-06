@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     max-height: 100%;
     width: auto;
     font-size: 7.25em!important;
-    margin-top: -36px;
+    margin-top: -34px;
   }
 `;
 
