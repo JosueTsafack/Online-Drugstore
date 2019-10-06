@@ -52,7 +52,7 @@ const Private = () => (
       {/* C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\Homepage-image.jpg */}
       <div className="headerImage"> 
       <BoxHeading textAlign="center" mb={4}>
-        <Heading as="h1">Premiere pharmacie en ligne au Cameroun</Heading>
+        <Heading as="h1" className="homeIntroText">Premiere pharmacie en ligne au Cameroun</Heading>
         <Text fontSize={4}>
           Cliquez, Commander et faites-vous livrer a domicile
         </Text>

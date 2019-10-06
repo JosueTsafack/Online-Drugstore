@@ -59,12 +59,12 @@ const Footer = () => {
             Here you can use rows and columns here to organize your footer
             content.
           </p>
-          <form class="input-group">
-            <input type="text" class="form-control form-control-sm" placeholder="Entrez votre e-mail"
+          <form className="input-group">
+            <input type="text" className="form-control form-control-sm" placeholder="Entrez votre e-mail"
               aria-label="Votre e-mail" aria-describedby="basic-addon2"/>
           </form>
-          <div class="input-group-append">
-              <button class="btn btn-sm btn-outline-white my-0" type="button">S'abonner</button>
+          <div className="input-group-append">
+              <button className="btn btn-sm btn-outline-white my-0" type="button">S'abonner</button>
           </div>
         </MDBCol>
         <MDBCol md="2">

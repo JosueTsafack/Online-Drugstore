@@ -234,10 +234,15 @@ a:hover {
 
 .headerImage {
     ${'' /* background: url(https://avatars1.githubusercontent.com/u/182219?v=4); */}
-    ${'' /* background: url("../../assets/media/images/Homepage-image.jpg"); */}
-    background-image: url("https://avatars1.githubusercontent.com/u/182219?v=4");
+    ${'' /* background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */}
+    background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg");
     height: 350px;
 }
+
+.homeIntroText {
+  font-size: 48px;
+}
+
 
 
 
