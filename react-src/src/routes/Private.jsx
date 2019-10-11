@@ -28,11 +28,11 @@ const BoxHeader = styled.div`
 const BoxHeading = styled.div`
   width: 350px;
   width: 400px;
-  margin-left: 50px;
+  margin-left: 140px;
   padding-top: 35px;
 
-  @media (min-width: 600px) {
-    margin-left: 148px;
+  @media only screen and (min-width: 0) and (max-width: 1023px) {
+    margin-left: 38px;
   }
 `;
 

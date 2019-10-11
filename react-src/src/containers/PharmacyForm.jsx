@@ -24,11 +24,10 @@ import Loader from 'components/Loader';
 import { useField } from '@formiz/core'
 import { isEmail } from '@formiz/validations'
 import { isRequired } from '@formiz/validations' 
-import { Formiz } from '@formiz/core'
+import { Formiz, useForm } from '@formiz/core'
 
 const { responsive, spacer } = utils;
 const { grays } = theme;
-
 
 export class PharmacyForm extends React.Component {
     constructor(props) {
@@ -41,15 +40,18 @@ export class PharmacyForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    // myForm = useForm();
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
     handleSubmit(event) {
-        alert('An essay was submitted: ' + this.state.value);
+        // alert('An essay was submitted: ' + this.state.value);
+        alert('An essay was submitted: ' + event);
+        console.log(event.currentTarget[0])
         event.preventDefault();
     }
-
 
 
     state = {
@@ -368,6 +370,21 @@ export class PharmacyForm extends React.Component {
 function mapStateToProps(state) {
     return { github: state.github };
 }
+
+export const MyForm = () => {
+    const myForm = useForm()
+    return (
+      <Formiz connect={myForm}>
+        <form onSubmit={myForm.submit}>
+          {myForm.isValid && 'The form is valid!'}
+          {/* Your fields here */}
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+      </Formiz>
+    )
+  }
 
 export default connect(mapStateToProps)(PharmacyForm);
 
