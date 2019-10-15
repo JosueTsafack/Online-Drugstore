@@ -39,21 +39,19 @@ const Footer = () => {
               content
         </p>
         </MDBCol>
-        <MDBCol md="2">
-        <h2 className="title">Plan de site</h2>
-            
+        <MDBCol md="3">
+          <h2 className="title">Plan de site</h2>
             <li className="list-unstyled">Conditions d'utilisation generales
             </li>
             <li className="list-unstyled">Categorie
             </li>
-            
         </MDBCol>
-        <MDBCol md="2">
-        <h2 className="title">Contactez nous</h2>
+        <MDBCol md="3">
+          <h2 className="title">Contactez nous</h2>
             <li className="list-unstyled">6xx xx xx xx
             </li>
         </MDBCol>
-        <MDBCol md="3">
+        {/* <MDBCol md="3">
         <h2 className="title">S'abonner a notre newsletter</h2>
           <p>
             Here you can use rows and columns here to organize your footer
@@ -66,17 +64,17 @@ const Footer = () => {
           <div className="input-group-append">
               <button className="btn btn-sm btn-outline-white my-0" type="button">S'abonner</button>
           </div>
-        </MDBCol>
-        <MDBCol md="2">
-        <h2 className="title">Modes de Paiements</h2>
-        <p>
-          Ici seront affiche nos modes de paiements 
-        </p>
+        </MDBCol> */}
+        <MDBCol md="3">
+          <h2 className="title">Modes de Paiements</h2>
+          <p>
+            Ici seront affiche nos modes de paiements 
+          </p>
         </MDBCol>
       </MDBRow>
       </MDBContainer>
         <FooterCopyright fluid>
-          &copy; {new Date().getFullYear()} Copyright: <a href="https://www.MDBootstrap.com"> Swiftdrugs Inc. </a>
+          &copy; {new Date().getFullYear()} Copyright: <a href="https://www.swiftdrugs.com"> Swiftdrugs Inc. </a>
         </FooterCopyright>
     </MDBFooter>
 );

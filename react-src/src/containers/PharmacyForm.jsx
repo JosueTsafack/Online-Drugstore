@@ -8,6 +8,8 @@ import { appColor } from 'modules/theme';
 import { getRepos, showAlert, switchMenu } from 'actions/index';
 import { STATUS } from 'constants/index';
 
+import { userActions } from '../actions/user.actions';
+
 import {
     ButtonGroup,
     Button,
@@ -21,10 +23,6 @@ import {
 } from 'styled-minimal';
 import Loader from 'components/Loader';
 
-import { useField } from '@formiz/core'
-import { isEmail } from '@formiz/validations'
-import { isRequired } from '@formiz/validations' 
-import { Formiz, useForm } from '@formiz/core'
 
 const { responsive, spacer } = utils;
 const { grays } = theme;
@@ -32,27 +30,84 @@ const { grays } = theme;
 export class PharmacyForm extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            value: 'Please write an essay about your favorite DOM element.'
+            user: {
+                firstName: '',
+                lastName: '',
+                phone: '',
+                adresse: '',
+                email: ''
+            },
+            pharmacy: {
+                pharmacyName: '',
+                locality: '',
+                phone: '',
+                adresse: '',
+                email: '',
+                creationDate: '',
+                promoterName: '',
+                promoterContact: ''
+            },
+            userSubmitted: false,
+            pharmacySubmitted: false
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        
+        this.handleUserChange = this.handleUserChange.bind(this);
+        this.handlePharmacyChange = this.handlePharmacyChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+
+        this.handleUserSubmit = this.handleUserSubmit.bind(this);
+        this.handlePharmacySubmit = this.handlePharmacySubmit.bind(this);
     }
 
-    // myForm = useForm();
+    handleUserChange(event) {
+        const { name, value } = event.target;
+        const { user } = this.state;
+        // console.log(this.state['user'])
 
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+        this.setState({
+            user: {
+                ...user,
+                [name]: value
+            }
+        });
     }
 
-    handleSubmit(event) {
-        // alert('An essay was submitted: ' + this.state.value);
-        alert('An essay was submitted: ' + event);
-        console.log(event.currentTarget[0])
+    handlePharmacyChange(event) {
+        const { name, value } = event.target;
+        const { pharmacy } = this.state;
+
+        this.setState({
+            pharmacy: {
+                ...pharmacy,
+                [name]: value
+            }
+        });
+    }
+
+    handleUserSubmit(event) {
         event.preventDefault();
+
+        this.setState({ userSubmitted: true });
+        const user = this.state['user'];
+        if (user.firstName && user.lastName && user.phone && user.adresse && user.email) {
+            this.props.subscribe(user);
+        }
     }
 
+    handlePharmacySubmit(event) {
+        event.preventDefault();
+
+        this.setState({ pharmacySubmitted: true });
+        const pharmacy = this.state['pharmacy']; 
+        if (pharmacy.pharmacyName && pharmacy.locality && pharmacy.phone &&
+            pharmacy.adresse && pharmacy.email && pharmacy.creationDate &&
+             pharmacy.promoterName && pharmacy.promoterContact) {
+            this.props.subscribe(pharmacy);
+        }
+    }
 
     state = {
         query: 'react',
@@ -95,246 +150,127 @@ export class PharmacyForm extends React.Component {
         const { github } = this.props;
         const data = github.repos.data[query] || [];
         let output;
-        // const [isLoading, setIsLoading] = React.useState(false)
-        // 1. Create a reusable field
-        const MyField = (props) => {
-            const {
-                errorMessage,
-                id,
-                isValid,
-                isPristine,
-                isSubmitted,
-                resetKey,
-                setValue,
-                value,
-            } = useField(props)
-            const { label, type, isRequired } = props
-            const [isFocused, setIsFocused] = React.useState(false);
-            const showError = !isValid && (!isPristine || isSubmitted)
-            // const [isLoading, setIsLoading] = React.useState(false)
-            return (
-                <div className={`demo-form-group ${(showError && !isFocused) ? 'is-error' : ''}`}>
-                    <label
-                        className="demo-label"
-                        htmlFor={id}
-                    >
-                        {label}
-                        {isRequired && ' *'}
-                    </label>
-                    <input
-                        key={resetKey}
-                        id={id}
-                        type={type || 'text'}
-                        defaultValue={value}
-                        className="demo-input"
-                        onChange={e => setValue(e.target.value)}
-                        onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
-                        aria-invalid={!isValid}
-                        aria-describedby={!isValid ? `${id}-error` : null}
-                    />
-                    {showError && (
-                        <div id={`${id}-error`} className="demo-form-feedback">
-                            {errorMessage}
-                        </div>
-                    )}
-                </div>
-            )
-        };
-
+        const { registering  } = this.props;
+        const { user, userSubmitted, pharmacySubmitted, pharmacy } = this.state;
 
         if (query === 'react') {
-            output = 
-            <Formiz >
-                <form onSubmit={this.handleSubmit}
-                    noValidate
-                    className="demo-form"
-                    style={{ minHeight: '16rem' }}
-                >
-                    <div className="demo-form__content">
-                        <MyField
-                            name="Nom de la pharmacie"
-                            label="Nom de la pharmacie"
-                            isRequired="Name is required"
-                        />
-                        <MyField
-                            name="Localisation"
-                            label="Localisation"
-                        />
-                        <MyField
-                            name="Téléphone"
-                            label="Téléphone"
-                        />
-                        <MyField
-                            name="Adresse"
-                            label="Adresse"
-                        /> 
-                        <MyField
-                            name="Email"
-                            label="Email"
-                            type="email"
-                            isRequired="Email is required"
-                            // validations={[
-                            //     {
-                            //         rule: validations.isEmail(),
-                            //         message: 'Not a valid email',
-                            //     }
-                            // ]}
-                        />
-        
-                        <MyField
-                            name="Numéro de contribuable"
-                            label="Numéro de contribuable"
-                        />
-                        <MyField
-                            name="Date de création"
-                            label="Date de création"
-                        />
-                        <MyField
-                            name="Nom du promoteur"
-                            label="Nom du promoteur"
-                        />
-                        <MyField
-                            name="Contact du promoteur"
-                            label="Contact du promoteur"
-                        />
-                    </div>
-                    <div className="demo-form__footer">
-                        <div
-                            className="ml-auto"
-                            style={{ minWidth: '6rem' }}
-                        >
-                            <button
-                                className="demo-button is-primary"
-                                type="submit"
-                                // disabled={isLoading || (!form.isValid && form.isSubmitted)}
-                            >
-                            S'inscrire
-                                {/* {isLoading ? 'Loading...' : 'Submit'} */}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </Formiz>
-        }else if(query === 'redux') {
-            output =
-            <Formiz >
-                <form onSubmit={this.handleSubmit}
-                    noValidate
-                    className="demo-form"
-                    style={{ minHeight: '16rem' }}
-                >
-                    <div className="demo-form__content">
-                        <MyField
-                            name="Nom"
-                            label="Nom"
-                            isRequired="Name is required"
-                        />
-                        <MyField
-                            name="Prenom"
-                            label="Prenom"
-                        />
-                        <MyField
-                            name="Téléphone"
-                            label="Téléphone"
-                        />
-                        <MyField
-                            name="Adresse"
-                            label="Adresse"
-                        /> 
-                        <MyField
-                            name="Email"
-                            label="Email"
-                            type="email"
-                            isRequired="Email is required"
-                            // validations={[
-                            //     {
-                            //         rule: validations.isEmail(),
-                            //         message: 'Not a valid email',
-                            //     }
-                            // ]}
-                        />
-                        {/* <MyField
-                            name="password"
-                            label="Password"
-                            type="password"
-                        />
-                        <MyField
-                            name="passwordConfirm"
-                            label="Confirm password"
-                            type="password"
-                            validations={[
-                                {
-                                    rule: (value, values) => values.password === value,
-                                    message: 'Passwords do not match',
+            output = <div className="col-md-6 col-md-offset-3">
+                        <h2>S'abonnez-vous en tant que pharmacie</h2>
+                        <form name="form" onSubmit={this.handlePharmacySubmit}>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.pharmacyName ? ' has-error' : '')}>
+                                <label htmlFor="pharmacyName">Nom de votre pharmacie</label>
+                                <input type="text" className="form-control" name="pharmacyName" value={pharmacy.pharmacyName} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.pharmacyName &&
+                                    <div className="help-block">Nom de votre pharmacie is required</div>
                                 }
-                            ]}
-                        /> */}
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.locality ? ' has-error' : '')}>
+                                <label htmlFor="locality">Localisation</label>
+                                <input type="text" className="form-control" name="locality" value={pharmacy.locality} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.locality &&
+                                    <div className="help-block">Localisation is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !user.phone ? ' has-error' : '')}>
+                                <label htmlFor="phone">Téléphone</label>
+                                <input type="text" className="form-control" name="phone" value={pharmacy.phone} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.phone &&
+                                    <div className="help-block">Téléphone is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.adresse ? ' has-error' : '')}>
+                                <label htmlFor="adresse">Adresse</label>
+                                <input type="text" className="form-control" name="adresse" value={pharmacy.adresse} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.adresse &&
+                                    <div className="help-block">Adresse is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.email ? ' has-error' : '')}>
+                                <label htmlFor="email">Email</label>
+                                <input type="text" className="form-control" name="email" value={pharmacy.email} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.email &&
+                                    <div className="help-block">Email is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.creationDate ? ' has-error' : '')}>
+                                <label htmlFor="creationDate">Date de création</label>
+                                <input type="text" className="form-control" name="creationDate" value={pharmacy.creationDate} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.creationDate &&
+                                    <div className="help-block">Date de création is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterName ? ' has-error' : '')}>
+                                <label htmlFor="promoterName">Nom du promoteur</label>
+                                <input type="text" className="form-control" name="promoterName" value={pharmacy.promoterName} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.promoterName &&
+                                    <div className="help-block">Nom du promoteur is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterContact ? ' has-error' : '')}>
+                                <label htmlFor="promoterContact">Contact du promoteur</label>
+                                <input type="text" className="form-control" name="promoterContact" value={pharmacy.promoterContact} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.promoterContact &&
+                                    <div className="help-block">Contact du promoteur is required</div>
+                                }
+                            </div>
+                            <div className="form-group">
+                                <button className="btn btn-primary">S'abonner</button>
+                                {registering && 
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                }
+                                <Link to="/login" className="btn btn-link">Cancel</Link>
+                            </div>
+                        </form>
                     </div>
-                    <div className="demo-form__footer">
-                        <div
-                            className="ml-auto"
-                            style={{ minWidth: '6rem' }}
-                        >
-                            <button
-                                className="demo-button is-primary"
-                                type="submit"
-                                // disabled={isLoading || (!form.isValid && form.isSubmitted)}
-                            >
-                            S'inscrire
-                                {/* {isLoading ? 'Loading...' : 'Submit'} */}
-                            </button>
-                        </div>
+        }else if(query === 'redux') {
+            output = <div className="col-md-6 col-md-offset-3">
+                        <h2>S'abonnez-vous en tant que particulier</h2>
+                        <form name="form" onSubmit={this.handleUserSubmit}>
+                            <div className={'form-group' + (userSubmitted && !user.firstName ? ' has-error' : '')}>
+                                <label htmlFor="firstName">Nom</label>
+                                <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.firstName &&
+                                    <div className="help-block">Nom is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (userSubmitted && !user.lastName ? ' has-error' : '')}>
+                                <label htmlFor="lastName">Prenom</label>
+                                <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.lastName &&
+                                    <div className="help-block">Prenom is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (userSubmitted && !user.phone ? ' has-error' : '')}>
+                                <label htmlFor="phone">Téléphone</label>
+                                <input type="text" className="form-control" name="phone" value={user.phone} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.phone &&
+                                    <div className="help-block">Téléphone is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (userSubmitted && !user.adresse ? ' has-error' : '')}>
+                                <label htmlFor="adresse">Adresse</label>
+                                <input type="text" className="form-control" name="adresse" value={user.adresse} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.adresse &&
+                                    <div className="help-block">Adresse is required</div>
+                                }
+                            </div>
+                            <div className={'form-group' + (userSubmitted && !user.email ? ' has-error' : '')}>
+                                <label htmlFor="email">Email</label>
+                                <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.email &&
+                                    <div className="help-block">Email is required</div>
+                                }
+                            </div>
+                            <div className="form-group">
+                                <button className="btn btn-primary">S'abonner</button>
+                                {registering && 
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                }
+                                <Link to="/login" className="btn btn-link">Cancel</Link>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                </Formiz>
             }
-
-        {/* <form onSubmit={this.handleSubmit}>
-        <label>
-          Last name:
-          <input
-            name="numberOfGuests"
-            type="text"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        </label>
-        <label>
-          First name:
-          <input
-            name="numberOfGuests"
-            type="text"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        </label>
-        <label>
-          Is going:
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={this.state.isGoing}
-            onChange={this.handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Number of guests:
-          <input
-            name="numberOfGuests"
-            type="text"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        </label>
-        <label>
-          Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-    </form>; */}
 
         return (
             <div key="GitHub" data-testid="GitHubWrapper">
@@ -368,24 +304,17 @@ export class PharmacyForm extends React.Component {
 
 /* istanbul ignore next */
 function mapStateToProps(state) {
-    return { github: state.github };
+    console.log('mapStateToProps',state)
+    return { 
+        github: state.github,
+        subscribe: userActions.subscribe, // you should send your action like this
+     };
 }
 
-export const MyForm = () => {
-    const myForm = useForm()
-    return (
-      <Formiz connect={myForm}>
-        <form onSubmit={myForm.submit}>
-          {myForm.isValid && 'The form is valid!'}
-          {/* Your fields here */}
-          <button type="submit">
-            Submit
-          </button>
-        </form>
-      </Formiz>
-    )
-  }
+function mapState(state) {
+    const { registering } = state.registration;
+    return { registering };
+}
+
 
 export default connect(mapStateToProps)(PharmacyForm);
-
-/* export default PharmacyForm; */

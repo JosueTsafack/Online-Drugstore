@@ -54,14 +54,14 @@ const Private = () => (
       <BoxHeading textAlign="center" mb={4}>
         <Heading as="h1" className="homeIntroText">Premiere pharmacie en ligne au Cameroun</Heading>
         <Text fontSize={4}>
-          Cliquez, Commander et faites-vous livrer a domicile
+          Cliquez, Commander et faites-vous livrer à domicile
         </Text>
       </BoxHeading>
       </div>
     </BoxHeader>
     <Container id="HeaderIntro" verticalPadding>
       <Header>
-        <Heading className="Heading">S'inscrire</Heading>
+        <Heading className="Heading">Abonnez-vous et notre equipe vous contactera</Heading>
         {/* <Paragraph>
           You can get this boilerplate{' '}
           <Link href="https://github.com/gilbarbara/react-redux-saga-boilerplate/" target="_blank">
@@ -70,7 +70,7 @@ const Private = () => (
         </Paragraph> */}
       </Header>
       <Box textAlign="center" mb={4}>
-        <Heading as="h5">Inscrivez-vous et beneficiez des nombreux avantages qu'offre Swiftdrugs</Heading>
+        <Heading as="h5">Beneficiez des nombreux avantages qu'offre Swiftdrugs</Heading>
         <Text fontSize={1}>
           <i>Votre Pharmacie en ligne...</i>
         </Text>
@@ -80,7 +80,7 @@ const Private = () => (
 
     <Container verticalPadding>
       <Box textAlign="left" mb={4}>
-          <Heading className="DeliveryImageHeading" as="h3">Votre service de livraison a domicile</Heading>
+          <Heading className="DeliveryImageHeading" as="h3">Votre service de livraison à domicile</Heading>
       </Box> 
       <DeliveryImage />
     </Container>
