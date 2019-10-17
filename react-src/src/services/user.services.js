@@ -6,13 +6,14 @@ export const userService = {
 };
 
 function subscribe(user) {
+    console.log('preparing to post!')
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/api/users/subscribe`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -21,6 +22,7 @@ function handleResponse(response) {
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
+                console.log('response on the way back!')
                 logout();
                 location.reload(true);
             }

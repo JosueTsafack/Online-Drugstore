@@ -17,7 +17,13 @@ export const Wrapper = styled.div`
     height:2em;
   }
 
-  @media (max-width: 625px) {
+  @media only screen and (min-width: 0px) and (max-width: 450px) {
+    svg {
+      width:3em;
+    }
+  }
+
+  @media only screen and (min-width: 450px) and (max-width: 625px) {
     svg {
       width:4em;
     }

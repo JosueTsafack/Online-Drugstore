@@ -125,7 +125,7 @@ const HeaderTitleWithLogo = styled(Container)`
     padding-left: 16px!important;
 `;
 
-const logoHeader = styled(Container)`
+const LogoHeader = styled(Container)`
     width: 30%!important;
     float: left!important;
 `;
@@ -202,10 +202,10 @@ function Header({ activePage }) {
         <HeaderContainer>
           <StyledNavbar expand collapseOnSelect>
           <Navbar.Brand href="/">
-            <logoHeader className="logoHeader">
+            <LogoHeader className="LogoHeader">
               <Logo type="logo"/>
               <HeaderTitleWithLogo className="HeaderTitleWithLogo">Swiftdrugs</HeaderTitleWithLogo>
-            </logoHeader>
+            </LogoHeader>
           </Navbar.Brand>
           <Nav role="navigation" id="top" className="d-flex d-md-flex">
             {NAV_LINKS.map(({ link, title, exact }) => (

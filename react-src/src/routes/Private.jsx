@@ -23,6 +23,10 @@ const BoxHeader = styled.div`
   color: white;
   height: 350px;
   margin-top: -15px;
+
+  @media only screen and (min-width: 0) and (max-width: 360px) {
+    margin-top: 12px;
+  }
 `;
 
 const BoxHeading = styled.div`

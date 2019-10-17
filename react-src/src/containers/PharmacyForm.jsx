@@ -65,7 +65,6 @@ export class PharmacyForm extends React.Component {
     handleUserChange(event) {
         const { name, value } = event.target;
         const { user } = this.state;
-        // console.log(this.state['user'])
 
         this.setState({
             user: {
@@ -154,63 +153,63 @@ export class PharmacyForm extends React.Component {
         const { user, userSubmitted, pharmacySubmitted, pharmacy } = this.state;
 
         if (query === 'react') {
-            output = <div className="col-md-6 col-md-offset-3">
-                        <h2>S'abonnez-vous en tant que pharmacie</h2>
+            output = <div className="col-md-6 col-md-offset-3 demo-form">
+                        <h2 className="formHeader">S'abonnez-vous en tant que pharmacie</h2>
                         <form name="form" onSubmit={this.handlePharmacySubmit}>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.pharmacyName ? ' has-error' : '')}>
                                 <label htmlFor="pharmacyName">Nom de votre pharmacie</label>
                                 <input type="text" className="form-control" name="pharmacyName" value={pharmacy.pharmacyName} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.pharmacyName &&
-                                    <div className="help-block">Nom de votre pharmacie is required</div>
+                                    <div className="help-block">Nom de votre pharmacie est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.locality ? ' has-error' : '')}>
                                 <label htmlFor="locality">Localisation</label>
                                 <input type="text" className="form-control" name="locality" value={pharmacy.locality} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.locality &&
-                                    <div className="help-block">Localisation is required</div>
+                                    <div className="help-block">Localisation est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !user.phone ? ' has-error' : '')}>
                                 <label htmlFor="phone">Téléphone</label>
                                 <input type="text" className="form-control" name="phone" value={pharmacy.phone} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.phone &&
-                                    <div className="help-block">Téléphone is required</div>
+                                    <div className="help-block">Téléphone est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.adresse ? ' has-error' : '')}>
                                 <label htmlFor="adresse">Adresse</label>
                                 <input type="text" className="form-control" name="adresse" value={pharmacy.adresse} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.adresse &&
-                                    <div className="help-block">Adresse is required</div>
+                                    <div className="help-block">Adresse est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.email ? ' has-error' : '')}>
                                 <label htmlFor="email">Email</label>
                                 <input type="text" className="form-control" name="email" value={pharmacy.email} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.email &&
-                                    <div className="help-block">Email is required</div>
+                                    <div className="help-block">Email est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.creationDate ? ' has-error' : '')}>
                                 <label htmlFor="creationDate">Date de création</label>
                                 <input type="text" className="form-control" name="creationDate" value={pharmacy.creationDate} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.creationDate &&
-                                    <div className="help-block">Date de création is required</div>
+                                    <div className="help-block">Date de création est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterName ? ' has-error' : '')}>
                                 <label htmlFor="promoterName">Nom du promoteur</label>
                                 <input type="text" className="form-control" name="promoterName" value={pharmacy.promoterName} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.promoterName &&
-                                    <div className="help-block">Nom du promoteur is required</div>
+                                    <div className="help-block">Nom du promoteur est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterContact ? ' has-error' : '')}>
                                 <label htmlFor="promoterContact">Contact du promoteur</label>
                                 <input type="text" className="form-control" name="promoterContact" value={pharmacy.promoterContact} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.promoterContact &&
-                                    <div className="help-block">Contact du promoteur is required</div>
+                                    <div className="help-block">Contact du promoteur est obligatoire</div>
                                 }
                             </div>
                             <div className="form-group">
@@ -218,47 +217,47 @@ export class PharmacyForm extends React.Component {
                                 {registering && 
                                     <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                 }
-                                <Link to="/login" className="btn btn-link">Cancel</Link>
+                                <Link to="/login" className="btn btn-link">Annuler</Link>
                             </div>
                         </form>
                     </div>
         }else if(query === 'redux') {
-            output = <div className="col-md-6 col-md-offset-3">
-                        <h2>S'abonnez-vous en tant que particulier</h2>
+            output = <div className="col-md-6 col-md-offset-3 demo-form">
+                        <h2 className="formHeader">S'abonnez-vous en tant que particulier</h2>
                         <form name="form" onSubmit={this.handleUserSubmit}>
                             <div className={'form-group' + (userSubmitted && !user.firstName ? ' has-error' : '')}>
                                 <label htmlFor="firstName">Nom</label>
                                 <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleUserChange} />
                                 {userSubmitted && !user.firstName &&
-                                    <div className="help-block">Nom is required</div>
+                                    <div className="help-block">Nom est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (userSubmitted && !user.lastName ? ' has-error' : '')}>
                                 <label htmlFor="lastName">Prenom</label>
                                 <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleUserChange} />
                                 {userSubmitted && !user.lastName &&
-                                    <div className="help-block">Prenom is required</div>
+                                    <div className="help-block">Prenom est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (userSubmitted && !user.phone ? ' has-error' : '')}>
                                 <label htmlFor="phone">Téléphone</label>
                                 <input type="text" className="form-control" name="phone" value={user.phone} onChange={this.handleUserChange} />
                                 {userSubmitted && !user.phone &&
-                                    <div className="help-block">Téléphone is required</div>
+                                    <div className="help-block">Téléphone est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (userSubmitted && !user.adresse ? ' has-error' : '')}>
                                 <label htmlFor="adresse">Adresse</label>
                                 <input type="text" className="form-control" name="adresse" value={user.adresse} onChange={this.handleUserChange} />
                                 {userSubmitted && !user.adresse &&
-                                    <div className="help-block">Adresse is required</div>
+                                    <div className="help-block">Adresse est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (userSubmitted && !user.email ? ' has-error' : '')}>
                                 <label htmlFor="email">Email</label>
                                 <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleUserChange} />
                                 {userSubmitted && !user.email &&
-                                    <div className="help-block">Email is required</div>
+                                    <div className="help-block">Email est obligatoire</div>
                                 }
                             </div>
                             <div className="form-group">
@@ -266,7 +265,7 @@ export class PharmacyForm extends React.Component {
                                 {registering && 
                                     <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                 }
-                                <Link to="/login" className="btn btn-link">Cancel</Link>
+                                <Link to="/login" className="btn btn-link">Annuler</Link>
                             </div>
                         </form>
                     </div>
@@ -304,7 +303,6 @@ export class PharmacyForm extends React.Component {
 
 /* istanbul ignore next */
 function mapStateToProps(state) {
-    console.log('mapStateToProps',state)
     return { 
         github: state.github,
         subscribe: userActions.subscribe, // you should send your action like this

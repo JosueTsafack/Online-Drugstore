@@ -64,7 +64,24 @@ align-text: middle;
 }
 
 
-@media (max-width: 546px) {
+@media only screen and (min-width: 0px) and (max-width: 450px) {
+  .FixedHeaderInfo1 {
+    overflow: auto;
+    padding-bottom:48px;
+  } 
+
+  .FixedHeaderInfo2 {
+    overflow: auto;
+    padding-bottom: 49px;
+  }
+
+  .FixedHeaderInfo3 {
+    overflow: auto;
+    padding-bottom: 98px;
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 546px) {
   .FixedHeaderInfo1 {
     overflow: auto;
     padding-bottom:48px;
@@ -232,10 +249,24 @@ a:hover {
   font-size: 17px;
 }
 
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1.5rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 .headerImage {
-    ${'' /* background: url(https://avatars1.githubusercontent.com/u/182219?v=4); */}
+    background: url(https://avatars1.githubusercontent.com/u/182219?v=4);
     ${'' /* background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */}
-    background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg");
+    ${'' /* background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */}
     height: 350px;
 }
 
@@ -346,12 +377,12 @@ a:hover {
 
 
 @media (max-width: 1023px) {
-  .logoHeader {
+  .LogoHeader {
     margin-left: -112px;
   }
 
   .HeaderTitleWithLogo {
-    margin-left: -39px;
+    ${'' /* margin-left: -39px; */}
     font-size: 28px;
     margin-top: -74px;
   }
@@ -389,15 +420,19 @@ a:hover {
     border-color: #e2e8f0;
 }
 
-.demo-button.is-primary {
-    background-color: ${appColor};
+.btn.btn-primary {
+    background-color: ${appColor}!important;
     color: white;
     border-style: none;
-    display: inline-flex;
-    font-family: inherit;
     font-size: 16px;
     -ms-flex-pack: center;
-    line-height: 1;
+}
+
+.formHeader {
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: green;
+    font-size: 24px;
 }
 
 .demo-button:disabled {
@@ -426,6 +461,7 @@ a:hover {
     width: 100%;
     margin-top: 10px;
 }
+
 /*css of the required asterisk*/
 label[for^="required"]::after {
     bottom: 0;
@@ -433,6 +469,14 @@ label[for^="required"]::after {
     content: '*';
     position: relative;
     transform: translate(-100%, 0);
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 17px;
 }
 
 /* Input */
@@ -477,9 +521,13 @@ label[for^="required"]::after {
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
     overflow: hidden;
     margin: auto;
-    width: 450px;
     padding: 20px;
     margin-top: 38px;
+}
+
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
+    ${'' /* color: #a94442; */}
+    color: red;
 }
 
 @media (min-width: 900px) {
