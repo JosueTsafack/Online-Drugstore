@@ -6,9 +6,9 @@ session_start();
 /* DATABASE CONFIGURATION */
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'banan');
-define("BASE_URL", "http://localhost:3000/");
+define('DB_PASSWORD', 'root');
+define('DB_DATABASE', 'swiftdrugs');
+define("BASE_URL", "http://localhost/api");
 define("SITE_KEY", 'yourSecretKey');
 
 
