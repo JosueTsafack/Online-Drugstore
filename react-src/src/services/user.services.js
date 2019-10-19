@@ -13,14 +13,14 @@ function subscribe(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/subscribe`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}`+'?tp=subscribe', requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
-    console.log(response);
+    
     return response.text().then(text => {
-        
         const data = text && JSON.parse(text);
+        
         console.log('data: ' + data);
         if (!response.ok) {
             if (response.status === 401) {
