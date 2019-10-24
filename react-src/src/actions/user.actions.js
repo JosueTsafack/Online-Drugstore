@@ -10,7 +10,7 @@ export const userActions = {
 function subscribe(user) {
     userService.subscribe(user).then(
         success => { 
-            console.log('Request sent')
+            // console.log('Request sent')
             // dispatch(success());
             // history.push('/login');
             // dispatch(alertActions.success('Registration successful'));
