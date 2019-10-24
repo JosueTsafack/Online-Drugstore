@@ -27,6 +27,7 @@ use BestShop\Database\DbQuery;
 use BestShop\Database\DbCore;
 use BestShop\Database\DbPDOCore;
 use BestShop\Database\DbMySQLiCore;
+use BestShop\Util\ArrayUtils;
 
 abstract class Db extends DbCore {};
 class DbPDO extends DbPDOCore {};
@@ -41,7 +42,7 @@ $config = array(
 	/** MySQL database username */
 	'database_user' => 'root',
 	/** MySQL database password */ 
-	'database_password' => 'root',
+	'database_password' => '',
 	/** MySQL Database Table prefix. */
 	'database_prefix' => '',
 	/** preferred database */
@@ -58,6 +59,8 @@ $config = array(
 	]
 );
 
+define('_DB_SERVER_', $config['database_host']);
+define('_DB_NAME_', $config['database_name']);
 define('_DB_USER_', $config['database_user']);
 define('_DB_PASSWD_', $config['database_password']);
 define('_DB_PREFIX_',  $config['database_prefix']);
@@ -75,14 +78,18 @@ $api->config('debug', true);
 /**
  * Request Payload
  */
-$params = $api->request->get();
+// $params = $api->request->get();
+$payload = $api->request()->get();
+// $name = ArrayUtils::get($payload, 'requestOptions');
+// print_r($name);
+
 $requestPayload = $api->request->post();
 
-$api->group('/api', function () use ($api) {
+// $api->group('/api', function () use ($api) {
 	$api->group('/v1', function () use ($api) {
 		/** Get all Products */
 		$api->get('/products?', '\BestShop\v1\Product:getProducts')->name('get_products');
-		
+
 		/** Add a Product */
 		$api->post('/products?', '\BestShop\v1\Product:addProduct')->name('add_products');
 	
@@ -107,7 +114,7 @@ $api->group('/api', function () use ($api) {
 		/** search products */
 		$api->get('/search?', '\BestShop\v1\Product:searchProducts')->name('search_products');
 	});
-});
+// });
 
 $api->notFound(function () use ($api) {
 	$api->response([
