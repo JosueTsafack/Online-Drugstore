@@ -18,10 +18,6 @@ require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR
 require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'autoload.php'; 
 require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'functions.php'; 
 
-// require_once 'autoload.php'; 
-// require_once 'autoload.php'; 
-// require_once 'functions.php'; 
-
 use BestShop\Api;
 use BestShop\Database\DbQuery;
 use BestShop\Database\DbCore;
@@ -36,7 +32,7 @@ class DbMySQLi extends DbMySQLiCore {};
 /** CORS Middleware */
 $config = array(
 	/** MySQL database name */
-	'database_name' => 'swiftbase',
+	'database_name' => 'swiftbase_v1',
 	/** MySQL hostname */
 	'database_host' => 'localhost',
 	/** MySQL database username */
@@ -78,41 +74,46 @@ $api->config('debug', true);
 /**
  * Request Payload
  */
-// $params = $api->request->get();
+$params = $api->request->get();
 $payload = $api->request()->get();
-// $name = ArrayUtils::get($payload, 'requestOptions');
-// print_r($name);
 
 $requestPayload = $api->request->post();
 
 // $api->group('/api', function () use ($api) {
 	$api->group('/v1', function () use ($api) {
 		/** Get all Products */
-		$api->get('/products?', '\BestShop\v1\Product:getProducts')->name('get_products');
+		// $api->get('/products?', '\BestShop\v1\Product:getProducts')->name('get_products');
 
-		/** Add a Product */
-		$api->post('/products?', '\BestShop\v1\Product:addProduct')->name('add_products');
-	
-		/** Get a single Product */
-		$api->get('/products/:productId?', '\BestShop\v1\Product:getProduct')->name('add_product');
-
-		/** Update a single Product */
-		$api->patch('/products/:productId?', '\BestShop\v1\Product:updateProduct')->name('update_product');
-	
-		$api->delete('/products/:productId?', '\BestShop\v1\Product:deleteProduct')->name('delete_product');
-		
-		/** Grouping Category Endpoints */
-		$api->group('/categories', function () use ($api) {
-			/** Get all Categories */
-			$api->get('/?', '\BestShop\v1\Category:getCategories')->name('get_categories');
+		/** Grouping subscribe Endpoints */
+		$api->group('/subscribe', function () use ($api) {
+			/** Add an User */
+			$api->post('/user?', '\BestShop\v1\User:addUser')->name('add_user');
 			
-			/** Add a Category */
-			$api->post('/?', '\BestShop\v1\Category:addCategory')->name('add_category');
+			/** Add a Pharmacy */
+			$api->post('/pharmacy?', '\BestShop\v1\Pharmacy:addPharmacy')->name('add_pharmacy');
 	
 		});
+	
+		/** Get a single Product */
+		// $api->get('/products/:productId?', '\BestShop\v1\Product:getProduct')->name('add_product');
+
+		// /** Update a single Product */
+		// $api->patch('/products/:productId?', '\BestShop\v1\Product:updateProduct')->name('update_product');
+	
+		// $api->delete('/products/:productId?', '\BestShop\v1\Product:deleteProduct')->name('delete_product');
 		
-		/** search products */
-		$api->get('/search?', '\BestShop\v1\Product:searchProducts')->name('search_products');
+		// /** Grouping Category Endpoints */
+		// $api->group('/categories', function () use ($api) {
+		// 	/** Get all Categories */
+		// 	$api->get('/?', '\BestShop\v1\Category:getCategories')->name('get_categories');
+			
+		// 	/** Add a Category */
+		// 	$api->post('/?', '\BestShop\v1\Category:addCategory')->name('add_category');
+	
+		// });
+		
+		// /** search products */
+		// $api->get('/search?', '\BestShop\v1\Product:searchProducts')->name('search_products');
 	});
 // });
 
