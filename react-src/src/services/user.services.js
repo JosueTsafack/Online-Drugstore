@@ -6,14 +6,24 @@ export const userService = {
 };
 
 function subscribe(user) {
+
+    if( Object.keys(user).length == 5 ) { // normal user
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        };
+        return fetch(`${config.apiUrl}/subscribe/user`, requestOptions).then(handleResponse);
+    } 
+
+    // pharmacy
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    // return fetch(`${config.apiUrl}/subscribe`, requestOptions).then(handleResponse);
-    // console.log(`${config.apiUrl}/products`, requestOptions);
-    return fetch(`${config.apiUrl}/products`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/subscribe/pharmacy`, requestOptions).then(handleResponse);
+    // return fetch(`${config.apiUrl}/products`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

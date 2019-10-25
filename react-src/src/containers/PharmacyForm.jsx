@@ -33,21 +33,20 @@ export class PharmacyForm extends React.Component {
 
         this.state = {
             user: {
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
                 phone: '',
                 adresse: '',
                 email: ''
             },
             pharmacy: {
-                pharmacyName: '',
-                locality: '',
+                pharmacy_name: '',
                 phone: '',
                 adresse: '',
                 email: '',
-                creationDate: '',
-                promoterName: '',
-                promoterContact: ''
+                creation_date: '',
+                promoter_name: '',
+                promoter_phone: ''
             },
             userSubmitted: false,
             pharmacySubmitted: false
@@ -91,7 +90,7 @@ export class PharmacyForm extends React.Component {
 
         this.setState({ userSubmitted: true });
         const user = this.state['user'];
-        if (user.firstName && user.lastName && user.phone && user.adresse && user.email) {
+        if (user.first_name && user.last_name && user.phone && user.adresse && user.email) {
             this.props.subscribe(user);
         }
     }
@@ -101,9 +100,9 @@ export class PharmacyForm extends React.Component {
 
         this.setState({ pharmacySubmitted: true });
         const pharmacy = this.state['pharmacy']; 
-        if (pharmacy.pharmacyName && pharmacy.locality && pharmacy.phone &&
-            pharmacy.adresse && pharmacy.email && pharmacy.creationDate &&
-             pharmacy.promoterName && pharmacy.promoterContact) {
+        if (pharmacy.pharmacy_name && pharmacy.phone &&
+            pharmacy.adresse && pharmacy.email && pharmacy.creation_date &&
+             pharmacy.promoter_name && pharmacy.promoter_phone) {
             this.props.subscribe(pharmacy);
         }
     }
@@ -156,18 +155,11 @@ export class PharmacyForm extends React.Component {
             output = <div className="col-md-6 col-md-offset-3 demo-form">
                         <h2 className="formHeader">S'abonnez-vous en tant que pharmacie</h2>
                         <form name="form" onSubmit={this.handlePharmacySubmit}>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.pharmacyName ? ' has-error' : '')}>
-                                <label htmlFor="pharmacyName">Nom de votre pharmacie</label>
-                                <input type="text" className="form-control" name="pharmacyName" value={pharmacy.pharmacyName} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.pharmacyName &&
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.pharmacy_name ? ' has-error' : '')}>
+                                <label htmlFor="pharmacy_name">Nom de votre pharmacie</label>
+                                <input type="text" className="form-control" name="pharmacy_name" value={pharmacy.pharmacy_name} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.pharmacy_name &&
                                     <div className="help-block">Nom de votre pharmacie est obligatoire</div>
-                                }
-                            </div>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.locality ? ' has-error' : '')}>
-                                <label htmlFor="locality">Localisation</label>
-                                <input type="text" className="form-control" name="locality" value={pharmacy.locality} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.locality &&
-                                    <div className="help-block">Localisation est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !user.phone ? ' has-error' : '')}>
@@ -191,24 +183,24 @@ export class PharmacyForm extends React.Component {
                                     <div className="help-block">Email est obligatoire</div>
                                 }
                             </div>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.creationDate ? ' has-error' : '')}>
-                                <label htmlFor="creationDate">Date de création</label>
-                                <input type="text" className="form-control" name="creationDate" value={pharmacy.creationDate} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.creationDate &&
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.creation_date ? ' has-error' : '')}>
+                                <label htmlFor="creation_date">Date de création</label>
+                                <input type="text" className="form-control" name="creation_date" value={pharmacy.creation_date} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.creation_date &&
                                     <div className="help-block">Date de création est obligatoire</div>
                                 }
                             </div>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterName ? ' has-error' : '')}>
-                                <label htmlFor="promoterName">Nom du promoteur</label>
-                                <input type="text" className="form-control" name="promoterName" value={pharmacy.promoterName} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.promoterName &&
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoter_name ? ' has-error' : '')}>
+                                <label htmlFor="promoter_name">Nom du promoteur</label>
+                                <input type="text" className="form-control" name="promoter_name" value={pharmacy.promoter_name} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.promoter_name &&
                                     <div className="help-block">Nom du promoteur est obligatoire</div>
                                 }
                             </div>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoterContact ? ' has-error' : '')}>
-                                <label htmlFor="promoterContact">Contact du promoteur</label>
-                                <input type="text" className="form-control" name="promoterContact" value={pharmacy.promoterContact} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.promoterContact &&
+                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoter_phone ? ' has-error' : '')}>
+                                <label htmlFor="promoter_phone">Téléphone du promoteur</label>
+                                <input type="text" className="form-control" name="promoter_phone" value={pharmacy.promoter_phone} onChange={this.handlePharmacyChange} />
+                                {pharmacySubmitted && !pharmacy.promoter_phone &&
                                     <div className="help-block">Contact du promoteur est obligatoire</div>
                                 }
                             </div>
@@ -225,17 +217,17 @@ export class PharmacyForm extends React.Component {
             output = <div className="col-md-6 col-md-offset-3 demo-form">
                         <h2 className="formHeader">S'abonnez-vous en tant que particulier</h2>
                         <form name="form" onSubmit={this.handleUserSubmit}>
-                            <div className={'form-group' + (userSubmitted && !user.firstName ? ' has-error' : '')}>
-                                <label htmlFor="firstName">Nom</label>
-                                <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleUserChange} />
-                                {userSubmitted && !user.firstName &&
+                            <div className={'form-group' + (userSubmitted && !user.first_name ? ' has-error' : '')}>
+                                <label htmlFor="first_name">Nom</label>
+                                <input type="text" className="form-control" name="first_name" value={user.first_name} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.first_name &&
                                     <div className="help-block">Nom est obligatoire</div>
                                 }
                             </div>
-                            <div className={'form-group' + (userSubmitted && !user.lastName ? ' has-error' : '')}>
-                                <label htmlFor="lastName">Prenom</label>
-                                <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleUserChange} />
-                                {userSubmitted && !user.lastName &&
+                            <div className={'form-group' + (userSubmitted && !user.last_name ? ' has-error' : '')}>
+                                <label htmlFor="last_name">Prenom</label>
+                                <input type="text" className="form-control" name="last_name" value={user.last_name} onChange={this.handleUserChange} />
+                                {userSubmitted && !user.last_name &&
                                     <div className="help-block">Prenom est obligatoire</div>
                                 }
                             </div>

@@ -44,3 +44,29 @@ INSERT INTO `category` (`category_id`, `name`, `description`, `date_upd`, `date_
 (5, 'Movies', 'Movie products.', '0000-00-00 00:00:00', '2016-01-08 13:27:26'),
 (6, 'Books', 'Kindle books, audio books and more.', '0000-00-00 00:00:00', '2016-01-08 13:27:47'),
 (13, 'Sports', 'Drop into new winter gear.', '2016-01-09 02:24:24', '2016-01-09 01:24:24');
+
+CREATE TABLE IF NOT EXISTS `user` (
+    `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name` VARCHAR(50) NOT NULL,
+    `phone` VARCHAR(50) NOT NULL,
+    `adresse` VARCHAR(100) NOT NULL, 
+    `email` VARCHAR(100) NOT NULL,
+    `date_add` DATETIME NOT NULL,
+    UNIQUE KEY unique_email (email),
+    PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 65;
+
+CREATE TABLE IF NOT EXISTS `pharmacy` (
+    `pharmacy_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `pharmacy_name` VARCHAR(100) NOT NULL,
+    `phone` VARCHAR(50) NOT NULL,
+    `adresse` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL, 
+    `creation_date` VARCHAR(50) NOT NULL,
+    `promoter_name` VARCHAR(100) NOT NULL,
+    `promoter_phone` VARCHAR(50) NOT NULL,
+    `date_add` DATETIME NOT NULL,
+    UNIQUE KEY unique_email_pharm (email),
+    PRIMARY KEY (`pharmacy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;

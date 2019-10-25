@@ -40,90 +40,78 @@ class Product extends Route {
 		$api = $this->api;
 		$payload = $api->request()->post(); 
 
+		$name = ArrayUtils::get($payload, 'name');
+		$description = ArrayUtils::get($payload, 'description');
+		$price = ArrayUtils::get($payload, 'price');
+		$category_id = ArrayUtils::get($payload, 'category_id');
 
-		$firstName = ArrayUtils::get($payload, 'firstName');
-		$lastName = ArrayUtils::get($payload, 'lastName');
-		$phone = ArrayUtils::get($payload, 'phone');
-		$adresse = ArrayUtils::get($payload, 'adresse');
-		$email = ArrayUtils::get($payload, 'email');
-		
+		if (!Validate::isGenericName($name)) {
+			return $api->response([
+				'success' => false,
+				'message' => 'Enter a valid product name'
+			]);
+		}
+
+		if (!Validate::isCleanHtml($description)) {
+			return $api->response([
+				'success' => false,
+				'message' => 'Enter a valid description of the product'
+			]);
+		}
+
+		if (!Validate::isPrice($price)) {
+			return $api->response([
+				'success' => false,
+				'message' => 'Enter a valid price of the product'
+			]);
+		}
+
+		if(!Validate::isInt($category_id)) {
+			return $api->response([
+				'success' => false,
+				'message' => 'Enter a valid category ID of the product'
+			]);
+		}
+
+		$category = new CategoryObject( (int) $category_id );
+		if (!Validate::isLoadedObject($category)) {
+			return $api->response([
+				'success' => false,
+				'message' => 'The category ID (' . $category_id . ') does not exist'
+			]);
+		}
+
+		$product = new ProductObject();
+		$product->name = $name;
+		$product->description = $description;
+		$product->price = (float) $price;
+		$product->category_id = $category->id;
+
+		$ok = $product->save();
+		// or $product->add();
+
+		if (!$ok) {
+			return $api->response([
+				'success' => false,
+				'message' => 'Unable to create product'
+			]);
+		}
+
 		return $api->response([
 			'success' => true,
-			'message' => 'Response from server: '.count($payload)
+			'message' => 'Product was Created',
+			'product' => [
+				'product_id' => $product->id,
+				'name' => $product->id,
+				'description' => $product->description,
+				'price' => (float) $product->price,
+				'category' => [
+					'category_id' => $category->id,
+					'name' => $category->name,
+					'description' => $category->description,
+				],
+			]
 		]);
-
-		// $name = ArrayUtils::get($payload, 'name');
-		// $description = ArrayUtils::get($payload, 'description');
-		// $price = ArrayUtils::get($payload, 'price');
-		// $category_id = ArrayUtils::get($payload, 'category_id');
-
-		// if (!Validate::isGenericName($name)) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'Enter a valid product name'
-		// 	]);
-		// }
-
-		// if (!Validate::isCleanHtml($description)) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'Enter a valid description of the product'
-		// 	]);
-		// }
-
-		// if (!Validate::isPrice($price)) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'Enter a valid price of the product'
-		// 	]);
-		// }
-
-		// if(!Validate::isInt($category_id)) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'Enter a valid category ID of the product'
-		// 	]);
-		// }
-
-		// $category = new CategoryObject( (int) $category_id );
-		// if (!Validate::isLoadedObject($category)) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'The category ID (' . $category_id . ') does not exist'
-		// 	]);
-		// }
-
-		// $product = new ProductObject();
-		// $product->name = $name;
-		// $product->description = $description;
-		// $product->price = (float) $price;
-		// $product->category_id = $category->id;
-
-		// $ok = $product->save();
-		// // or $product->add();
-
-		// if (!$ok) {
-		// 	return $api->response([
-		// 		'success' => false,
-		// 		'message' => 'Unable to create product'
-		// 	]);
-		// }
-
-		// return $api->response([
-		// 	'success' => true,
-		// 	'message' => 'Product was Created',
-		// 	'product' => [
-		// 		'product_id' => $product->id,
-		// 		'name' => $product->id,
-		// 		'description' => $product->description,
-		// 		'price' => (float) $product->price,
-		// 		'category' => [
-		// 			'category_id' => $category->id,
-		// 			'name' => $category->name,
-		// 			'description' => $category->description,
-		// 		],
-		// 	]
-		// ]);
 	}
 
 	public function getProduct( $productId ) {
