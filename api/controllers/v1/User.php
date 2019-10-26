@@ -31,21 +31,21 @@ class User extends Route {
 		if (!Validate::isGenericName($first_name)) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Enter a valid first name'
+				'message' => 'S\'il vous plait entrez un prénom valide!'
 			]);
         }
         
         if (!Validate::isGenericName($last_name)) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Enter a valid last name'
+				'message' => 'S\'il vous plait entrez un nom valide!'
 			]);
         }
         
         if (!Validate::isGenericName($adresse)) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Enter a valid adresse'
+				'message' => 'S\'il vous plait entrez une adresse valide!'
 			]);
 		}
 
@@ -62,13 +62,15 @@ class User extends Route {
 		if (!$ok) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Unable to subscribe, please try again later'
+				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayz á nouveau'
+				// 'message' => 'Unable to subscribe, please try again later'
 			]);
 		}
 
 		return $api->response([
 			'success' => true,
-			'message' => 'User successfully subscribed'
+			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours á venir'
+			// 'message' => 'User successfully subscribed'
 		]);
 	}
 

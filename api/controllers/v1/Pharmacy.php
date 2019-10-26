@@ -33,14 +33,14 @@ class Pharmacy extends Route {
 		if (!Validate::isGenericName($pharmacy_name)) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Enter a valid pharmacy name'
+				'message' => 'S\'il vous plait entrez un nom valide!'
 			]);
         }
         
         if (!Validate::isGenericName($adresse)) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Enter a valid adresse'
+				'message' => 'S\'il vous plait entrez une adresse valide!'
 			]);
 		}
 
@@ -61,13 +61,13 @@ class Pharmacy extends Route {
 		if (!$ok) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Unable to subscribe, please try again later'
+				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayz á nouveau'
 			]);
 		}
 
 		return $api->response([
 			'success' => true,
-			'message' => 'Pharmacy successfully subscribed'
+			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours á venir'
 		]);
 	}
 

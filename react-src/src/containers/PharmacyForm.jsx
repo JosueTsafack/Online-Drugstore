@@ -147,6 +147,10 @@ export class PharmacyForm extends React.Component {
         const { query } = this.state;
         const { github } = this.props;
         const data = github.repos.data[query] || [];
+
+        // const { response } = this.props;
+        // console.log(response)
+        // const res = response.success;
         let output;
         const { registering  } = this.props;
         const { user, userSubmitted, pharmacySubmitted, pharmacy } = this.state;
@@ -154,6 +158,7 @@ export class PharmacyForm extends React.Component {
         if (query === 'react') {
             output = <div className="col-md-6 col-md-offset-3 demo-form">
                         <h2 className="formHeader">S'abonnez-vous en tant que pharmacie</h2>
+                        <div className='error-group'>error-group</div>
                         <form name="form" onSubmit={this.handlePharmacySubmit}>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.pharmacy_name ? ' has-error' : '')}>
                                 <label htmlFor="pharmacy_name">Nom de votre pharmacie</label>
@@ -216,6 +221,7 @@ export class PharmacyForm extends React.Component {
         }else if(query === 'redux') {
             output = <div className="col-md-6 col-md-offset-3 demo-form">
                         <h2 className="formHeader">S'abonnez-vous en tant que particulier</h2>
+                        {/* <div className={'error-group' + (userSubmitted && !res ? ' has-error' : '')}>error-group</div> */}
                         <form name="form" onSubmit={this.handleUserSubmit}>
                             <div className={'form-group' + (userSubmitted && !user.first_name ? ' has-error' : '')}>
                                 <label htmlFor="first_name">Nom</label>

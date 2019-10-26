@@ -8,15 +8,17 @@ export const userActions = {
 };
   
 function subscribe(user) {
-    userService.subscribe(user).then(text => {
+    userService.subscribe(user).then(response => {
         success => { 
-            console.log('Request sent')
+            console.log("response");
             // dispatch(success());
             // history.push('/login');
             // dispatch(alertActions.success('Registration successful'));
+            $('.error-group').html(response.message);
         },
         error => {
-            console.log('an error occured')
+            alert('Désolé! une érreur s\'est produite.');
+            console.log('an error occured');
             // dispatch(failure(error.toString()));
             // dispatch(alertActions.error(error.toString()));
         }
