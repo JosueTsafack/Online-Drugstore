@@ -195,7 +195,7 @@ function Header({ activePage }) {
     <FixedHeader className="FixedHeader">
         <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
         <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
-        <FixedHeaderInfo3 className="FixedHeaderInfo3">+237 6xx xx xx xx</FixedHeaderInfo3>
+        <FixedHeaderInfo3 className="FixedHeaderInfo3">(+237) 678-999-229/ (+237) 693-267-649</FixedHeaderInfo3>
     </FixedHeader>
     <header className="Header">
      <HeaderWrapper className="animate">

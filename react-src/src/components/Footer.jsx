@@ -34,21 +34,20 @@ const Footer = () => {
         <MDBCol md="3">
         <h2 className="title">Service de livraison</h2>
         <p>
-              Here you can use rows and columns here to organize your footer
-              content. Here you can use rows and columns here to organize your footer
-              content
+            Nous effectuons les livraisons 24h/24 dans toutes les régions du Cameroun,
+            néanmoins les régions deservies pour l'instant ne sont que Doula et Yaoundé. 
         </p>
         </MDBCol>
         <MDBCol md="3">
           <h2 className="title">Plan de site</h2>
             <li className="list-unstyled">Conditions d'utilisation generales
             </li>
-            <li className="list-unstyled">Categorie
-            </li>
         </MDBCol>
         <MDBCol md="3">
           <h2 className="title">Contactez nous</h2>
-            <li className="list-unstyled">6xx xx xx xx
+            <li className="list-unstyled">(+237) 678-999-229 
+            </li>
+            <li className="list-unstyled">(+237) 693-267-649 
             </li>
         </MDBCol>
         {/* <MDBCol md="3">
@@ -67,9 +66,12 @@ const Footer = () => {
         </MDBCol> */}
         <MDBCol md="3">
           <h2 className="title">Modes de Paiements</h2>
-          <p>
-            Ici seront affiche nos modes de paiements 
-          </p>
+          <li className="list-unstyled">Orange money 
+            </li>
+            <li className="list-unstyled">MTN mobile money 
+            </li>
+            <li className="list-unstyled">Paiement cash à la livraison
+            </li>
         </MDBCol>
       </MDBRow>
       </MDBContainer>

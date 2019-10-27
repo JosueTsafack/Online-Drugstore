@@ -54,8 +54,8 @@ const Private = () => (
     
       {/* <img src='https://avatars1.githubusercontent.com/u/182219?v=4' alt="DeliveryImage" /> */}
       {/* C:\Users\nguem\Desktop\swiftdrugs\swiftdrugs\assets\media\images\Homepage-image.jpg */}
-      <div className="headerImage"> 
-      <BoxHeading textAlign="center" mb={4}>
+      <div className="headerImage">
+        <BoxHeading textAlign="center" mb={4}>
         <Heading as="h1" className="homeIntroText">Premiere pharmacie en ligne au Cameroun</Heading>
         <Text fontSize={4}>
           Cliquez, Commander et faites-vous livrer à domicile

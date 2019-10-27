@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import { appColor } from 'modules/theme';
 
 
+
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
@@ -249,7 +250,7 @@ a:hover {
   font-size: 17px;
 }
 
-.form-control {
+.form-control, .sc-bwzfXH.kGGIis, .sc-bwzfXH.hZuEZs{
   display: block;
   width: 100%;
   padding: .375rem .75rem;

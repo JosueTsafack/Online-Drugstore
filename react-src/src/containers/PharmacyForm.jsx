@@ -23,6 +23,9 @@ import {
 } from 'styled-minimal';
 import Loader from 'components/Loader';
 
+import ModernDatepicker from 'react-modern-datepicker';
+import moment from 'moment';
+
 
 const { responsive, spacer } = utils;
 const { grays } = theme;
@@ -49,13 +52,15 @@ export class PharmacyForm extends React.Component {
                 promoter_phone: ''
             },
             userSubmitted: false,
-            pharmacySubmitted: false
+            pharmacySubmitted: false,
+            startDate: new Date()
         };
 
         
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handlePharmacyChange = this.handlePharmacyChange.bind(this);
         // this.handleChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
 
         this.handleUserSubmit = this.handleUserSubmit.bind(this);
         this.handlePharmacySubmit = this.handlePharmacySubmit.bind(this);
@@ -85,6 +90,16 @@ export class PharmacyForm extends React.Component {
         });
     }
 
+    handleDateChange(date) {
+        this.setState({
+          startDate: date,
+            pharmacy: {
+                ...this.state.pharmacy,
+                creation_date: date
+            }
+        })
+      }
+
     handleUserSubmit(event) {
         event.preventDefault();
 
@@ -101,7 +116,7 @@ export class PharmacyForm extends React.Component {
         this.setState({ pharmacySubmitted: true });
         const pharmacy = this.state['pharmacy']; 
         if (pharmacy.pharmacy_name && pharmacy.phone &&
-            pharmacy.adresse && pharmacy.email && pharmacy.creation_date &&
+            pharmacy.adresse && pharmacy.email && this.state.startDate &&
              pharmacy.promoter_name && pharmacy.promoter_phone) {
             this.props.subscribe(pharmacy);
         }
@@ -167,6 +182,15 @@ export class PharmacyForm extends React.Component {
                                     <div className="help-block">Nom de votre pharmacie est obligatoire</div>
                                 }
                             </div>
+                            <div className={'form-group' + (pharmacySubmitted && !this.state.startDate? ' has-error' : '')}>
+                                <label htmlFor="creation_date">Date de création</label>
+                                {/* <input type="text" className="form-control" name="creation_date" value={pharmacy.creation_date} onChange={this.handlePharmacyChange} /> */}
+                                {/* <ModernDatepicker date={this.state.date} onChange={this.handleDateChange} showBorder /> */}
+                                <ModernDatepicker date={this.state.startDate} format={'DD-MM-YYYY'} onChange={(date) => this.handleDateChange(date)}/>
+                                {/* {pharmacySubmitted && !this.state.startDate &&
+                                    <div className="help-block">Date de création est obligatoire</div>
+                                } */}
+                            </div>
                             <div className={'form-group' + (pharmacySubmitted && !user.phone ? ' has-error' : '')}>
                                 <label htmlFor="phone">Téléphone</label>
                                 <input type="text" className="form-control" name="phone" value={pharmacy.phone} onChange={this.handlePharmacyChange} />
@@ -186,13 +210,6 @@ export class PharmacyForm extends React.Component {
                                 <input type="text" className="form-control" name="email" value={pharmacy.email} onChange={this.handlePharmacyChange} />
                                 {pharmacySubmitted && !pharmacy.email &&
                                     <div className="help-block">Email est obligatoire</div>
-                                }
-                            </div>
-                            <div className={'form-group' + (pharmacySubmitted && !pharmacy.creation_date ? ' has-error' : '')}>
-                                <label htmlFor="creation_date">Date de création</label>
-                                <input type="text" className="form-control" name="creation_date" value={pharmacy.creation_date} onChange={this.handlePharmacyChange} />
-                                {pharmacySubmitted && !pharmacy.creation_date &&
-                                    <div className="help-block">Date de création est obligatoire</div>
                                 }
                             </div>
                             <div className={'form-group' + (pharmacySubmitted && !pharmacy.promoter_name ? ' has-error' : '')}>
