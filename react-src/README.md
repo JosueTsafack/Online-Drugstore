@@ -48,3 +48,14 @@
 - cypress 3.0.x
 
 `npm run test:e2e`
+
+### Error while running npm start in react-src
+
+when you clone the repository for the first time you have to uncomment the following lines of code(from 305 to 311) in react-src\node_modules\react-overlays\Dropdown.js
+// var UncontrolledDropdown = (0, \_uncontrollable.default)(Dropdown, {
+// show: 'onToggle'
+// });
+// UncontrolledDropdown.Menu = \_DropdownMenu.default;
+// UncontrolledDropdown.Toggle = \_DropdownToggle.default;
+// var \_default = UncontrolledDropdown;
+// exports.default = \_default;

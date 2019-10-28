@@ -2,8 +2,6 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { appColor } from 'modules/theme';
 
-
-
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
@@ -266,8 +264,12 @@ a:hover {
 
 .headerImage {
     background: url(https://avatars1.githubusercontent.com/u/182219?v=4);
-    ${'' /* background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */}
-    ${'' /* background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */}
+    ${
+      '' /* background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */
+    }
+    ${
+      '' /* background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */
+    }
     height: 350px;
 }
 
@@ -528,7 +530,7 @@ label {
 
 .has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
     ${'' /* color: #a94442; */}
-    color: red;
+    color: #f44336;
 }
 
 @media (min-width: 900px) {
@@ -601,6 +603,20 @@ p {
 
 .error-group {
   display: none;
+}
+
+.formError {
+  padding: 9px;
+  background-color: #f44336;
+  color: white;
+  opacity: 0.83;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+  padding-bottom: 4px;
+  text-align: center;
+  border-radius: 6px;
+  padding-top: 2px;
 }
 
 `;
