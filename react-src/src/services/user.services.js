@@ -6,7 +6,7 @@ export const userService = {
 };
 
 function subscribe(user) {
-
+    console.log(user)
     if( Object.keys(user).length == 5 ) { // normal user
         const requestOptions = {
             method: 'POST',
