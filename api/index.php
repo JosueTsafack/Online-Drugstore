@@ -1,405 +1,129 @@
-<?php
-require 'config.php';
-require 'Slim/Slim.php';
+<?php 
+/**
+ * @package    PHP Advanced API Guide
+ * @author     Davison Pro <davisonpro.coder@gmail.com>
+ * @copyright  2019 DavisonPro
+ * @version    1.0.0
+ * @since      File available since Release 1.0.0
+ */
 
-\Slim\Slim::registerAutoloader();
-$app = new \Slim\Slim();
+ // Namespaces
+define('API_NAMESPACE',          'BestShop');
+// define('DIRECTORY_SEPARATOR',	'/')
+define('API_DIR_ROOT',            dirname(__FILE__));
+define('API_DIR_CLASSES',         API_DIR_ROOT . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR);
+define('API_DIR_CONTROLLERS',     API_DIR_ROOT . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR);
 
-$app->post('/login','login'); /* User login */
-$app->post('/signup','signup'); /* User Signup  */
-$app->get('/getFeed','getFeed'); /* User Feeds  */
-$app->post('/feed','feed'); /* User Feeds  */
-$app->post('/feedUpdate','feedUpdate'); /* User Feeds  */
-$app->post('/feedDelete','feedDelete'); /* User Feeds  */
-$app->post('/getImages', 'getImages');
+require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php'; 
+require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'autoload.php'; 
+require_once API_DIR_ROOT . DIRECTORY_SEPARATOR . 'functions.php'; 
 
+use BestShop\Api;
+use BestShop\Database\DbQuery;
+use BestShop\Database\DbCore;
+use BestShop\Database\DbPDOCore;
+use BestShop\Database\DbMySQLiCore;
+use BestShop\Util\ArrayUtils;
 
-$app->run();
+abstract class Db extends DbCore {};
+class DbPDO extends DbPDOCore {};
+class DbMySQLi extends DbMySQLiCore {};
 
-/************************* USER LOGIN *************************************/
-/* ### User login ### */
-function login() {
-    
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    
-    try {
-        
-        $db = getDB();
-        $userData ='';
-        $sql = "SELECT user_id, name, email, username FROM users WHERE (username=:username or email=:username) and password=:password ";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("username", $data->username, PDO::PARAM_STR);
-        $password=hash('sha256',$data->password);
-        $stmt->bindParam("password", $password, PDO::PARAM_STR);
-        $stmt->execute();
-        $mainCount=$stmt->rowCount();
-        $userData = $stmt->fetch(PDO::FETCH_OBJ);
-        
-        if(!empty($userData))
-        {
-            $user_id=$userData->user_id;
-            $userData->token = apiToken($user_id);
-        }
-        
-        $db = null;
-         if($userData){
-               $userData = json_encode($userData);
-                echo '{"userData": ' .$userData . '}';
-            } else {
-               echo '{"error":{"text":"Bad request wrong username and password"}}';
-            }
+/** CORS Middleware */
+$config = array(
+	/** MySQL database name */
+	'database_name' => 'swiftbase_v1',
+	/** MySQL hostname */
+	'database_host' => 'localhost',
+	/** MySQL database username */
+	'database_user' => 'root',
+	/** MySQL database password */ 
+	'database_password' => '',
+	/** MySQL Database Table prefix. */
+	'database_prefix' => '',
+	/** preferred database */
+	'database_engine' => 'DbPDO', //DbMySQLi 
+	/** API CORS */
+	'cors' => [
+		'enabled' => true,
+		'origin' => '*', // can be a comma separated value or array of hosts
+		'headers' => [
+			'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Authorization, Cache-Control, Content-Type, Access-Control-Allow-Origin',
+			'Access-Control-Allow-Credentials' => 'true',
+			'Access-Control-Allow-Methods' => 'GET,PUT,POST,DELETE,OPTIONS,PATCH'
+		]
+	]
+);
 
-           
-    }
-    catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
+define('_DB_SERVER_', $config['database_host']);
+define('_DB_NAME_', $config['database_name']);
+define('_DB_USER_', $config['database_user']);
+define('_DB_PASSWD_', $config['database_password']);
+define('_DB_PREFIX_',  $config['database_prefix']);
+define('_MYSQL_ENGINE_',  $config['database_engine']);
 
+/** API Construct */
+$api = new Api([
+	'mode' => 'development',
+    'debug' => true
+]);
 
-/* ### User registration ### */
-function signup() {
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $email=$data->email;
-    $name=$data->name;
-    $username=$data->username;
-    $password=$data->password;
-    
-    try {
-        
-        $username_check = preg_match('~^[A-Za-z0-9_]{3,20}$~i', $username);
-        $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $email);
-        $password_check = preg_match('~^[A-Za-z0-9!@#$%^&*()_]{6,20}$~i', $password);
-        
-        echo $email_check.'<br/>'.$email;
-        
-        if (strlen(trim($username))>0 && strlen(trim($password))>0 && strlen(trim($email))>0 && $email_check>0 && $username_check>0 && $password_check>0)
-        {
-            echo 'here';
-            $db = getDB();
-            $userData = '';
-            $sql = "SELECT user_id FROM users WHERE username=:username or email=:email";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("username", $username,PDO::PARAM_STR);
-            $stmt->bindParam("email", $email,PDO::PARAM_STR);
-            $stmt->execute();
-            $mainCount=$stmt->rowCount();
-            $created=time();
-            if($mainCount==0)
-            {
-                
-                /*Inserting user values*/
-                $sql1="INSERT INTO users(username,password,email,name)VALUES(:username,:password,:email,:name)";
-                $stmt1 = $db->prepare($sql1);
-                $stmt1->bindParam("username", $username,PDO::PARAM_STR);
-                $password=hash('sha256',$data->password);
-                $stmt1->bindParam("password", $password,PDO::PARAM_STR);
-                $stmt1->bindParam("email", $email,PDO::PARAM_STR);
-                $stmt1->bindParam("name", $name,PDO::PARAM_STR);
-                $stmt1->execute();
-                
-                $userData=internalUserDetails($email);
-                
-            }
-            
-            $db = null;
-         
+$api->add(new \BestShop\Slim\CorsMiddleware());
+$api->config('debug', true);
 
-            if($userData){
-               $userData = json_encode($userData);
-                echo '{"userData": ' .$userData . '}';
-            } else {
-               echo '{"error":{"text":"Enter valid data"}}';
-            }
+/**
+ * Request Payload
+ */
+$params = $api->request->get();
+$payload = $api->request()->get();
 
-           
-        }
-        else{
-            echo '{"error":{"text":"Enter valid data"}}';
-        }
-    }
-    catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
+$requestPayload = $api->request->post();
 
-function email() {
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $email=$data->email;
+// $api->group('/api', function () use ($api) {
+	$api->group('/v1', function () use ($api) {
+		/** Get all Products */
+		// $api->get('/products?', '\BestShop\v1\Product:getProducts')->name('get_products');
 
-    try {
-       
-        $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $email);
-       
-        if (strlen(trim($email))>0 && $email_check>0)
-        {
-            $db = getDB();
-            $userData = '';
-            $sql = "SELECT user_id FROM emailUsers WHERE email=:email";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("email", $email,PDO::PARAM_STR);
-            $stmt->execute();
-            $mainCount=$stmt->rowCount();
-            $created=time();
-            if($mainCount==0)
-            {
-                
-                /*Inserting user values*/
-                $sql1="INSERT INTO emailUsers(email)VALUES(:email)";
-                $stmt1 = $db->prepare($sql1);
-                $stmt1->bindParam("email", $email,PDO::PARAM_STR);
-                $stmt1->execute();
-                
-                
-            }
-            $userData=internalEmailDetails($email);
-            $db = null;
-            if($userData){
-               $userData = json_encode($userData);
-                echo '{"userData": ' .$userData . '}';
-            } else {
-               echo '{"error":{"text":"Enter valid dataaaa"}}';
-            }
-        }
-        else{
-            echo '{"error":{"text":"Enter valid data"}}';
-        }
-    }
-    
-    catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
+		/** Grouping subscribe Endpoints */
+		$api->group('/subscribe', function () use ($api) {
+			/** Add an User */
+			$api->post('/user?', '\BestShop\v1\User:addUser')->name('add_user');
+			
+			/** Add a Pharmacy */
+			$api->post('/pharmacy?', '\BestShop\v1\Pharmacy:addPharmacy')->name('add_pharmacy');
+	
+		});
+	
+		/** Get a single Product */
+		// $api->get('/products/:productId?', '\BestShop\v1\Product:getProduct')->name('add_product');
 
+		// /** Update a single Product */
+		// $api->patch('/products/:productId?', '\BestShop\v1\Product:updateProduct')->name('update_product');
+	
+		// $api->delete('/products/:productId?', '\BestShop\v1\Product:deleteProduct')->name('delete_product');
+		
+		// /** Grouping Category Endpoints */
+		// $api->group('/categories', function () use ($api) {
+		// 	/** Get all Categories */
+		// 	$api->get('/?', '\BestShop\v1\Category:getCategories')->name('get_categories');
+			
+		// 	/** Add a Category */
+		// 	$api->post('/?', '\BestShop\v1\Category:addCategory')->name('add_category');
+	
+		// });
+		
+		// /** search products */
+		// $api->get('/search?', '\BestShop\v1\Product:searchProducts')->name('search_products');
+	});
+// });
 
-/* ### internal Username Details ### */
-function internalUserDetails($input) {
-    
-    try {
-        $db = getDB();
-        $sql = "SELECT user_id, name, email, username FROM users WHERE username=:input or email=:input";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("input", $input,PDO::PARAM_STR);
-        $stmt->execute();
-        $usernameDetails = $stmt->fetch(PDO::FETCH_OBJ);
-        $usernameDetails->token = apiToken($usernameDetails->user_id);
-        $db = null;
-        return $usernameDetails;
-        
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-    
-}
+$api->notFound(function () use ($api) {
+	$api->response([
+		'success' => false,
+		'error' => 'Resource Not Found'
+	]);
+	return $api->stop();
+});
 
-function getFeed(){
-  
-   
-    try {
-         
-        if(1){
-            $feedData = '';
-            $db = getDB();
-          
-                $sql = "SELECT * FROM feed  ORDER BY feed_id DESC LIMIT 15";
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-                $stmt->bindParam("lastCreated", $lastCreated, PDO::PARAM_STR);
-          
-            $stmt->execute();
-            $feedData = $stmt->fetchAll(PDO::FETCH_OBJ);
-           
-            $db = null;
-
-            if($feedData)
-            echo '{"feedData": ' . json_encode($feedData) . '}';
-            else
-            echo '{"feedData": ""}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-       
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-
-}
-
-function feed(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    $lastCreated = $data->lastCreated;
-    $systemToken=apiToken($user_id);
-   
-    try {
-         
-        if($systemToken == $token){
-            $feedData = '';
-            $db = getDB();
-            if($lastCreated){
-                $sql = "SELECT * FROM feed WHERE user_id_fk=:user_id AND created < :lastCreated ORDER BY feed_id DESC LIMIT 5";
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-                $stmt->bindParam("lastCreated", $lastCreated, PDO::PARAM_STR);
-            }
-            else{
-                $sql = "SELECT * FROM feed WHERE user_id_fk=:user_id ORDER BY feed_id DESC LIMIT 5";
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            }
-            $stmt->execute();
-            $feedData = $stmt->fetchAll(PDO::FETCH_OBJ);
-           
-            $db = null;
-
-            if($feedData)
-            echo '{"feedData": ' . json_encode($feedData) . '}';
-            else
-            echo '{"feedData": ""}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-       
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-
-}
-
-function feedUpdate(){
-
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    $feed=$data->feed;
-    
-    $systemToken=apiToken($user_id);
-   
-    try {
-         
-        if($systemToken == $token){
-         
-            
-            $feedData = '';
-            $db = getDB();
-            $sql = "INSERT INTO feed ( feed, created, user_id_fk) VALUES (:feed,:created,:user_id)";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("feed", $feed, PDO::PARAM_STR);
-            $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            $created = time();
-            $stmt->bindParam("created", $created, PDO::PARAM_INT);
-            $stmt->execute();
-            
-
-
-            $sql1 = "SELECT * FROM feed WHERE user_id_fk=:user_id ORDER BY feed_id DESC LIMIT 1";
-            $stmt1 = $db->prepare($sql1);
-            $stmt1->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            $stmt1->execute();
-            $feedData = $stmt1->fetch(PDO::FETCH_OBJ);
-
-
-            $db = null;
-            echo '{"feedData": ' . json_encode($feedData) . '}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-       
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-
-}
-
-
-
-function feedDelete(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    $feed_id=$data->feed_id;
-    
-    $systemToken=apiToken($user_id);
-   
-    try {
-         
-        if($systemToken == $token){
-            $feedData = '';
-            $db = getDB();
-            $sql = "Delete FROM feed WHERE user_id_fk=:user_id AND feed_id=:feed_id";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            $stmt->bindParam("feed_id", $feed_id, PDO::PARAM_INT);
-            $stmt->execute();
-            
-           
-            $db = null;
-            echo '{"success":{"text":"Feed deleted"}}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-       
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }   
-    
-}
-$app->post('/userImage','userImage'); /* User Details */
-function userImage(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    $imageB64=$data->imageB64;
-    $systemToken=apiToken($user_id);
-    try {
-        if(1){
-            $db = getDB();
-            $sql = "INSERT INTO imagesData(b64,user_id_fk) VALUES(:b64,:user_id)";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
-            $stmt->bindParam("b64", $imageB64, PDO::PARAM_STR);
-            $stmt->execute();
-            $db = null;
-            echo '{"success":{"status":"uploaded"}}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
-$app->post('/getImages', 'getImages');
-function getImages(){
-    $request = \Slim\Slim::getInstance()->request();
-    $data = json_decode($request->getBody());
-    $user_id=$data->user_id;
-    $token=$data->token;
-    
-    $systemToken=apiToken($user_id);
-    try {
-        if(1){
-            $db = getDB();
-            $sql = "SELECT b64 FROM imagesData";
-            $stmt = $db->prepare($sql);
-           
-            $stmt->execute();
-            $imageData = $stmt->fetchAll(PDO::FETCH_OBJ);
-            $db = null;
-            echo '{"imageData": ' . json_encode($imageData) . '}';
-        } else{
-            echo '{"error":{"text":"No access"}}';
-        }
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-?>
+$api->response()->header('Content-Type', 'application/json; charset=utf-8');
+$api->run();
