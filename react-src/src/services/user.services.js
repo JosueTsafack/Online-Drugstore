@@ -22,7 +22,25 @@ function subscribe(user) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   };
-  return fetch(`${config.apiUrl}/subscribe/pharmacy`, requestOptions).then(handleResponse);
+  return fetch(`${config.apiUrl}/subscribe/pharmacy`, requestOptions).then(handleResponse => {
+    success => {
+      console.log(`ma response: ${response}`);
+      // dispatch(success());
+      // history.push('/login');
+      // dispatch(alertActions.success('Registration successful'));
+      // $('.error-group').html(response.message);
+    },
+      error => {
+        alert("Désolé! une érreur s'est produite au niveau du serveur");
+        console.log('an error occured');
+        // dispatch(failure(error.toString()));
+        // dispatch(alertActions.error(error.toString()));
+      };
+    return handleResponse.json();
+  });
+  // .catch(error => {
+  //   alert(`Désolé! Une érreur s'est produite : ${error}`)
+  // }) /// TypeError: failed to fetch (the text may vary)
   // return fetch(`${config.apiUrl}/products`, requestOptions).then(handleResponse);
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
+import { useState, useEffect } from React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { appColor, headerHeight } from 'modules/theme';
 
-import { useState, useEffect } from "react";
-import { CSSTransition } from "react-transition-group";
+
+import { CSSTransition } from 'react-transition-group';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -12,7 +12,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-/*import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
+/* import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'; */
 
 /* import { logOut } from 'actions'; */
@@ -41,7 +41,7 @@ const HeaderWrapper = styled.header`
 
   padding-left: 100px;
   padding-right: 100px;
-  
+
   /* .animate {
     top: 50px;
   } */
@@ -73,7 +73,7 @@ const Logout = styled.button`
   display: flex;
   font-size: 1.3rem;
   padding: ${spacer(2)};
-  margin-top: -25px!important;
+  margin-top: -25px !important;
 
   ${responsive({ lg: 'font-size: 1.6rem;' })}; /* stylelint-disable-line */
 
@@ -89,49 +89,28 @@ const Logout = styled.button`
 `;
 
 const FixedHeader = styled(Container)`
-    width: 100%;
-    height: 45px;
-    background-color: #008000;
-    position: absolute;
-    top:0;
-    color: white;
-    max-width: none;
-    text-align: center;
-`;
-
-const FixedHeaderInfo1 = styled(Container)`
-    width: 45%;
-    display:inline-block;
-    color: white;
-`;
-
-const FixedHeaderInfo2 = styled(Container)`
-    width: 30%;
-    display:inline-block;
-    color: white;
-`;
-
-const FixedHeaderInfo3 = styled(Container)`
-    width: 25%;
-    display:inline-block;
-    color: white;
+  width: 100%;
+  height: 45px;
+  background-color: #008000;
+  position: absolute;
+  top: 0;
+  color: white;
+  max-width: none;
+  text-align: center;
 `;
 
 const HeaderTitleWithLogo = styled(Container)`
-        margin-top: -78px;
-    margin-left: 90px;
-    font-size: 36px;
-    font-weight: 600;
-    padding-left: 16px!important;
+  margin-top: -78px;
+  margin-left: 90px;
+  font-size: 36px;
+  font-weight: 600;
+  padding-left: 16px !important;
 `;
 
 const LogoHeader = styled(Container)`
-    width: 30%!important;
-    float: left!important;
+  width: 30% !important;
+  float: left !important;
 `;
-
-
-
 
 const StyledNavbar = styled(Navbar).attrs({
   as: 'header',
@@ -163,7 +142,6 @@ const StyledNavLink = styled(Nav.Link)`
   }
 `;
 
-
 const NAV_LINKS = [
   {
     link: '/',
@@ -192,37 +170,53 @@ const propTypes = {
 function Header({ activePage }) {
   return (
     <div>
-    <FixedHeader className="FixedHeader">
-        <FixedHeaderInfo1 className="FixedHeaderInfo1">Effectuez vos achats de medicaments et faites vous livrer a domicile</FixedHeaderInfo1>
-        <FixedHeaderInfo2 className="FixedHeaderInfo2">Votre Pharmacie en ligne pour le Cameroun</FixedHeaderInfo2>
-        <FixedHeaderInfo3 className="FixedHeaderInfo3">(+237) 678-999-229/ (+237) 693-267-649</FixedHeaderInfo3>
-    </FixedHeader>
-    <header className="Header">
-     <HeaderWrapper className="animate">
-        <HeaderContainer>
-          <StyledNavbar expand collapseOnSelect>
-          <Navbar.Brand href="/">
-            <LogoHeader className="LogoHeader">
-              <Logo type="logo"/>
-              <HeaderTitleWithLogo className="HeaderTitleWithLogo">Swiftdrugs</HeaderTitleWithLogo>
-            </LogoHeader>
-          </Navbar.Brand>
-          <Nav role="navigation" id="top" className="d-flex d-md-flex">
-            {NAV_LINKS.map(({ link, title, exact }) => (
-              <StyledNavLink
-                key={link}
-                href={link}
-                active={exact ? activePage === link : link}
-                /*active={exact ? activePage === link : activePage.startsWith(link)}*/
-              >
-                {title}
-              </StyledNavLink>
-            ))}
-          </Nav>
-        </StyledNavbar>
-        </HeaderContainer>
-      </HeaderWrapper>
-    </header>
+      <FixedHeader className="FixedHeader">
+        <ol className="HomeColumns u-clearfix">
+          <li className="HomeColumn HomeColumn--smaller">
+            <h6 className="HomeBlock-title HomeBlock-title--secondary FixedHeaderInfo">
+              Effectuez vos achats de medicaments et faites vous livrer à domicile
+            </h6>
+          </li>
+          <li className="HomeColumn HomeColumn--smaller HomeColumn--middle">
+            <h6 className="HomeBlock-title HomeBlock-title--secondary FixedHeaderInfo">
+              Votre Pharmacie en ligne pour le Cameroun
+            </h6>
+          </li>
+          <li className="HomeColumn HomeColumn--smaller">
+            <h6 className="HomeBlock-title HomeBlock-title--secondary FixedHeaderInfo">
+              (+237) 678-999-229/ (+237) 693-267-649
+            </h6>
+          </li>
+        </ol>
+      </FixedHeader>
+      <header className="Header">
+        <HeaderWrapper className="animate">
+          <HeaderContainer>
+            <StyledNavbar expand collapseOnSelect>
+              <Navbar.Brand href="/">
+                <LogoHeader className="LogoHeader">
+                  <Logo type="logo" />
+                  <HeaderTitleWithLogo className="HeaderTitleWithLogo">
+                    Swiftdrugs
+                  </HeaderTitleWithLogo>
+                </LogoHeader>
+              </Navbar.Brand>
+              <Nav role="navigation" id="top" className="d-flex d-md-flex">
+                {NAV_LINKS.map(({ link, title, exact }) => (
+                  <StyledNavLink
+                    key={link}
+                    href={link}
+                    active={exact ? activePage === link : link}
+                    /* active={exact ? activePage === link : activePage.startsWith(link)}*/
+                  >
+                    {title}
+                  </StyledNavLink>
+                ))}
+              </Nav>
+            </StyledNavbar>
+          </HeaderContainer>
+        </HeaderWrapper>
+      </header>
     </div>
   );
 }
@@ -231,11 +225,7 @@ Header.propTypes = propTypes;
 
 export default Header;
 
-
-
-
-
-/* 
+/*
 export default function Header() {
 
   const [isNavVisible, setNavVisibility] = useState(false);
@@ -263,12 +253,7 @@ export default function Header() {
     setNavVisibility(!isNavVisible);
   }; */
 
-
-
-
-
-
- /*
+/*
 export default class Header extends React.PureComponent {
 
   constructor() {
@@ -295,7 +280,7 @@ export default class Header extends React.PureComponent {
             <HeaderTitleWithLogo>Swiftdrugs</HeaderTitleWithLogo>
           </a>
         </logoHeader>
-          
+
           <Logout onClick={this.handleClickLogout}>
             <span>logout</span>
             <Icon name="sign-out" width={16} />
@@ -304,7 +289,7 @@ export default class Header extends React.PureComponent {
       </HeaderWrapper>
       </div> */
 
-  /* static propTypes = {
+/* static propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
 

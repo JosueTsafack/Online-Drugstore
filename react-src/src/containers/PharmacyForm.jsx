@@ -190,7 +190,8 @@ export class PharmacyForm extends React.Component {
       this.props.subscribe(user).then(response => {
         console.log(response);
       });
-
+      // .catch(error =>
+      //   alert(`Désolé! Une érreur s'est produite : ${error}`))
       //    this.setState({data: userData});
       //    console.log("handleusersubmit");
       //    console.log(userData);
