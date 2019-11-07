@@ -5,7 +5,7 @@ import { Container, Flex, Group, Heading, Input, Button, Paragraph } from 'style
 
 import { appColor } from 'modules/theme';
 
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter } from 'mdbreact';
 
 /* const Footer = styled.footer`
   border-top: 0.1rem solid #ddd;
@@ -26,29 +26,25 @@ const FooterCopyright = styled(Container)`
   }
 `;
 
-const Footer = () => {
-  return (
-  <MDBFooter color= "green" className="font-medium pt-4">
-      <MDBContainer fluid className="text-center text-md-left">
+const Footer = () => (
+  <MDBFooter color="green" className="font-medium pt-4">
+    <MDBContainer fluid className="text-center text-md-left">
       <MDBRow>
         <MDBCol md="3">
-        <h2 className="title">Service de livraison</h2>
-        <p>
-            Nous effectuons les livraisons 24h/24 dans toutes les régions du Cameroun,
-            néanmoins les régions deservies pour l'instant ne sont que Doula et Yaoundé. 
-        </p>
+          <h2 className="title">Service de livraison</h2>
+          <p>
+            Nous effectuons les livraisons 24h/24 dans toutes les régions du Cameroun, néanmoins les
+            régions deservies pour l'instant ne sont que Doula et Yaoundé.
+          </p>
         </MDBCol>
         <MDBCol md="3">
           <h2 className="title">Plan de site</h2>
-            <li className="list-unstyled">Conditions d'utilisation generales
-            </li>
+          <li className="list-unstyled">Conditions d'utilisation generales(bientôt)</li>
         </MDBCol>
         <MDBCol md="3">
           <h2 className="title">Contactez nous</h2>
-            <li className="list-unstyled">(+237) 678-999-229 
-            </li>
-            <li className="list-unstyled">(+237) 693-267-649 
-            </li>
+          <li className="list-unstyled">(+237) 678-999-229</li>
+          <li className="list-unstyled">(+237) 693-267-649</li>
         </MDBCol>
         {/* <MDBCol md="3">
         <h2 className="title">S'abonner a notre newsletter</h2>
@@ -66,19 +62,16 @@ const Footer = () => {
         </MDBCol> */}
         <MDBCol md="3">
           <h2 className="title">Modes de Paiements</h2>
-          <li className="list-unstyled">Orange money 
-            </li>
-            <li className="list-unstyled">MTN mobile money 
-            </li>
-            <li className="list-unstyled">Paiement cash à la livraison
-            </li>
+          <li className="list-unstyled">Orange money</li>
+          <li className="list-unstyled">MTN mobile money</li>
+          <li className="list-unstyled">Paiement cash à la livraison</li>
         </MDBCol>
       </MDBRow>
-      </MDBContainer>
-        <FooterCopyright fluid>
-          &copy; {new Date().getFullYear()} Copyright: <a href="https://www.swiftdrugs.com"> Swiftdrugs Inc. </a>
-        </FooterCopyright>
-    </MDBFooter>
+    </MDBContainer>
+    <FooterCopyright fluid>
+      &copy; {new Date().getFullYear()} Copyright:{' '}
+      <a href="https://www.swiftdrugs.com"> Swiftdrugs Inc. </a>
+    </FooterCopyright>
+  </MDBFooter>
 );
-  }
 export default Footer;

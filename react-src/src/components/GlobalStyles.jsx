@@ -506,6 +506,17 @@ p {
   padding-top: 2px;
 }
 
+.noRegisteringResponse {
+  display: none;
+}
+
+.registeringResponse {
+  margin: 10px 0;
+  ${'' /* padding: 10px; */}
+  border-radius: 3px 3px 3px 3px;
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
 `;
 
 export default () => <GlobalStyle />;

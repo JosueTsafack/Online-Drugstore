@@ -8,26 +8,20 @@ export const userActions = {
 };
 
 function subscribe(user) {
-  return (
-    userService
-      .subscribe(user)
-      // .then(response);
-      .then(response => {
-        success => {
-          console.log(response);
-          // dispatch(success());
-          // history.push('/login');
-          // dispatch(alertActions.success('Registration successful'));
-          // $('.error-group').html(response.message);
-        },
-          error => {
-            alert("Désolé! une érreur s'est produite.");
-            console.log('an error occured');
-            // dispatch(failure(error.toString()));
-            // dispatch(alertActions.error(error.toString()));
-          };
-        return response.json();
-      })
-  );
+  return userService.subscribe(user).then(response => {
+    success => {
+      // dispatch(success());
+      // history.push('/login');
+      // dispatch(alertActions.success('Registration successful'));
+      // $('.error-group').html(response.message);
+    },
+      error => {
+        alert("Désolé! une érreur s'est produite.");
+        console.log('an error occured');
+        // dispatch(failure(error.toString()));
+        // dispatch(alertActions.error(error.toString()));
+      };
+    return response;
+  });
   // return { type: userConstants.REGISTER_REQUEST, user };
 }

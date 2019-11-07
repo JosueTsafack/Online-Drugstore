@@ -59,7 +59,8 @@ export class PharmacyForm extends React.Component {
       emailValid: false,
       userFormValid: false,
       pharmacyFormValid: false,
-      data: {},
+      userRegisteringResponse: '',
+      pharmacyRegisteringResponse: '',
     };
 
     this.handleUserChange = this.handleUserChange.bind(this);
@@ -182,19 +183,14 @@ export class PharmacyForm extends React.Component {
 
     this.setState({ userSubmitted: true });
     const { user } = this.state;
-    //     if (user.first_name && user.last_name && user.phone && user.adresse && user.email) {
-    //        this.props.subscribe(user).then(function(response) {
-    //         console.log (response)
-    //    })
     if (user.first_name && user.last_name && user.phone && user.adresse && user.email) {
-      this.props.subscribe(user).then(response => {
-        console.log(response);
-      });
-      // .catch(error =>
-      //   alert(`Désolé! Une érreur s'est produite : ${error}`))
-      //    this.setState({data: userData});
-      //    console.log("handleusersubmit");
-      //    console.log(userData);
+      this.props
+        .subscribe(user)
+        .then(response => {
+          console.log(response);
+          this.setState({ userRegisteringResponse: response.message });
+        })
+        .catch(error => alert(`Désolé! Une érreur s'est produite : ${error}`));
     }
   }
 
@@ -212,7 +208,13 @@ export class PharmacyForm extends React.Component {
       pharmacy.promoter_name &&
       pharmacy.promoter_phone
     ) {
-      this.props.subscribe(pharmacy);
+      this.props
+        .subscribe(pharmacy)
+        .then(response => {
+          console.log(response);
+          this.setState({ pharmacyRegisteringResponse: response.message });
+        })
+        .catch(error => alert(`Désolé! Une érreur s'est produite : ${error}`));
     }
   }
 
@@ -276,6 +278,14 @@ export class PharmacyForm extends React.Component {
           <div className="panel panel-default">
             <FormErrors formErrors={this.state.formErrors} />
           </div>
+          <div
+            className={`form-group${
+              pharmacySubmitted && !this.setState.pharmacyRegisteringResponse
+                ? ' registeringResponse'
+                : ' noRegisteringResponse'
+            }`}
+          >{` ${this.state.pharmacyRegisteringResponse}`}</div>
+
           <form name="form" onSubmit={this.handlePharmacySubmit}>
             <div
               className={`form-group${
@@ -353,11 +363,8 @@ export class PharmacyForm extends React.Component {
               {pharmacySubmitted && !pharmacy.email && (
                 <div className="help-block">Email est obligatoire</div>
               )}
-              <div
-                className={`form-group
-                                    ${this.errorClass(this.state.formErrors.email)}`}
-              />
             </div>
+            <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`} />
             <div
               className={`form-group${
                 pharmacySubmitted && !pharmacy.promoter_name ? ' has-error' : ''
@@ -413,7 +420,13 @@ export class PharmacyForm extends React.Component {
           <div className="panel panel-default">
             <FormErrors formErrors={this.state.formErrors} />
           </div>
-          {/* <div className={'error-group' + (userSubmitted && !res ? ' has-error' : '')}>error-group</div> */}
+          <div
+            className={`form-group${
+              userSubmitted && !this.setState.userRegisteringResponse
+                ? ' registeringResponse'
+                : ' noRegisteringResponse'
+            }`}
+          >{` ${this.state.userRegisteringResponse}`}</div>
           <form name="form" onSubmit={this.handleUserSubmit}>
             <div className={`form-group${userSubmitted && !user.first_name ? ' has-error' : ''}`}>
               <label htmlFor="first_name">Nom</label>

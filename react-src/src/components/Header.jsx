@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from React from 'react';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { appColor, headerHeight } from 'modules/theme';
-
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -149,16 +149,16 @@ const NAV_LINKS = [
     exact: true,
   },
   {
-    link: '/getting-started/introduction',
+    link: '/partners',
     title: 'Nos partenaires',
   },
   {
-    link: '/components/alerts',
+    link: '/contact',
     title: 'Contact',
   },
   ,
   {
-    link: '/components/alerts',
+    link: '/blog',
     title: 'Blog',
   },
 ];
