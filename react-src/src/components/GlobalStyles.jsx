@@ -150,10 +150,9 @@ a:hover {
 }
 
 .headerImage {
-    background: url(https://avatars1.githubusercontent.com/u/182219?v=4);
-    ${
-      '' /* background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */
-    }
+    ${'' /* background: url(https://avatars1.githubusercontent.com/u/182219?v=4); */}
+    background: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg");
+    
     ${
       '' /* background-image: url("C:/Users/nguem/Desktop/swiftdrugs/swiftdrugs/assets/media/images/Homepage-image.jpg"); */
     }
@@ -517,6 +516,17 @@ p {
   color: #9F6000;
   background-color: #FEEFB3;
 }
+
+.homepage-links {
+  padding: 24px 0px 0px;
+  margin: 0;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  text-align: left;
+  color: green;
+}
+
 `;
 
 export default () => <GlobalStyle />;

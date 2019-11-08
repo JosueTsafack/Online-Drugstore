@@ -15,10 +15,13 @@ const Blog = () => (
   <Screen key="Blog" data-testid="BlogWrapper">
     <Container id="BlogContainer" verticalPadding>
       <Box textAlign="left" mb={4}>
-        <Heading as="h2">Blog</Heading>
+        <Heading as="h1" className="homepage-links">Swiftdrugs Blog</Heading>
       </Box>
-      <p>Ici vous pouvez lire notre blog.</p>
-    </Container>
+      <h1 className="homepage-links">Suivez-nous sur les réseaux sociaux afin de restez á la une sur nos nouveaux produits</h1>
+      <a target="_blank" href="https://www.facebook.com/swiftdrugs/">www.facebook.com/swiftdrugs/</a>
+      {/* <p>https://www.instagram.com/swiftdrugs/</p>
+      <p>https://www.twitter.com/swiftdrugs/</p>     */}
+      </Container>
   </Screen>
 );
 
