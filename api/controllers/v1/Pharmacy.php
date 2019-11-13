@@ -61,13 +61,13 @@ class Pharmacy extends Route {
 		if (!$ok) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayez á nouveau'
+				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayez à nouveau'
 			]);
 		}
 
 		return $api->response([
 			'success' => true,
-			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours á venir'
+			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours à venir'
 		]);
 	}
 

@@ -62,14 +62,14 @@ class User extends Route {
 		if (!$ok) {
 			return $api->response([
 				'success' => false,
-				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayz á nouveau'
+				'message' => 'Désolé! cet E-mail est déja utilisé, s\'il vout plaît reéssayz à nouveau'
 				// 'message' => 'Unable to subscribe, please try again later'
 			]);
 		}
 
 		return $api->response([
 			'success' => true,
-			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours á venir'
+			'message' => 'Merci! notre équipe entrera en contacte avec vous les jours à venir'
 			// 'message' => 'User successfully subscribed'
 		]);
 	}
