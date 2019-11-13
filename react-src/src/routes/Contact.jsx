@@ -33,8 +33,8 @@ const Contact = () => (
       <h3>Joel Nguemo, Gilchrist, Josue Nguemo</h3>
 
       <p> <strong >CEO, Directeur Général:</strong> Joel Nguemo</p>
-      <p> <strong >CFO, Directeur financier:</strong> Gilchrist</p>
-      <p> <strong >CTO, Directeur de la technologie, Chef de produit:</strong> Josué Nguemo</p>
+      <p> <strong >CFO, Directeur Financier:</strong> Gilchrist</p>
+      <p> <strong >CTO, Directeur Technique:</strong> Josué Nguemo</p>
       
       <h1 className="homepage-links">Notre mission</h1>
       <p>

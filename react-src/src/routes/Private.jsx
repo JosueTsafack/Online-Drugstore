@@ -86,19 +86,19 @@ const Private = () => (
       <Box textAlign="left" mb={4}>
           <Heading className="DeliveryImageHeading" as="h3">Les services qu'offre Swiftdrugs</Heading>
       </Box> 
-      <div class="topServiceContainer">
-        <ol class="HomeColumns u-clearfix">
-            <li class="HomeColumn HomeColumn--smaller">
-              <h3 class="HomeBlock-title HomeBlock-title--secondary">Moins chére</h3>
-              <p class="u-gray u-marginNone">Economisez en temps et en argent.</p>
+      <div className="topServiceContainer">
+        <ol className="HomeColumns u-clearfix">
+            <li className="HomeColumn HomeColumn--smaller">
+              <h3 className="HomeBlock-title HomeBlock-title--secondary">Moins chére</h3>
+              <p className="u-gray u-marginNone">Economisez en temps et en argent.</p>
             </li>
-            <li class="HomeColumn HomeColumn--smaller HomeColumn--middle">
-              <h3 class="HomeBlock-title HomeBlock-title--secondary">Rapide</h3>
-              <p class="u-gray u-marginNone">Plus besoin de fouillez toute la ville á la recherche de pharmacies de gardes!</p>
+            <li className="HomeColumn HomeColumn--smaller HomeColumn--middle">
+              <h3 className="HomeBlock-title HomeBlock-title--secondary">Rapide</h3>
+              <p className="u-gray u-marginNone">Plus besoin de fouillez toute la ville á la recherche de pharmacies de gardes!</p>
             </li>
-            <li class="HomeColumn HomeColumn--smaller">
-              <h3 class="HomeBlock-title HomeBlock-title--secondary">Recevez vos medicaments directement à la maison</h3>
-              <p class="u-gray u-marginNone">Commandez et faites vous livrez chez vous, même dans la nuit! Ca peut sauver des vies.</p>
+            <li className="HomeColumn HomeColumn--smaller">
+              <h3 className="HomeBlock-title HomeBlock-title--secondary">Recevez vos medicaments directement à la maison</h3>
+              <p className="u-gray u-marginNone">Commandez et faites vous livrez chez vous, même dans la nuit! Ca peut sauver des vies.</p>
             </li>
           </ol>
 

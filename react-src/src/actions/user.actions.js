@@ -16,7 +16,7 @@ function subscribe(user) {
       // $('.error-group').html(response.message);
     },
       error => {
-        alert("Désolé! une érreur s'est produite.");
+        // alert("Désolé! une érreur s'est produite.");
         console.log('an error occured');
         // dispatch(failure(error.toString()));
         // dispatch(alertActions.error(error.toString()));
