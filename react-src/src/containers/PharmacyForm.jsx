@@ -191,7 +191,7 @@ export class PharmacyForm extends React.Component {
           this.setState({ userRegisteringResponse: response.message });
         })
         .catch(
-          error => alert(`Désolé! Une érreur s'est produite, Veuillez réessayer plutard.`),
+          error => alert("Désolé! Une érreur s'est produite, Veuillez réessayer plutard."),
           // alert(`Désolé! Une érreur s'est produite : ${error}`)
         );
     }
@@ -218,7 +218,7 @@ export class PharmacyForm extends React.Component {
           this.setState({ pharmacyRegisteringResponse: response.message });
         })
         .catch(
-          error => alert(`Désolé! Une érreur s'est produite, Veuillez réessayer plutard.`),
+          error => alert("Désolé! Une érreur s'est produite, Veuillez réessayer plutard."),
           // alert(`Désolé! Une érreur s'est produite : ${error}`)
         );
     }
