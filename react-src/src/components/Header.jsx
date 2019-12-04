@@ -148,19 +148,30 @@ const NAV_LINKS = [
     title: 'Accueil',
     exact: true,
   },
-  {
-    link: '/partners',
-    title: 'Nos partenaires',
-  },
+  // {
+  //   link: '/partners',
+  //   title: 'Nos partenaires',
+  // },
   {
     link: '/contact',
     title: 'Contact',
   },
-  ,
+  // {
+  //   link: '/blog',
+  //   title: 'Blog',
+  // },
   {
-    link: '/blog',
-    title: 'Blog',
+    link: '/signup',
+    title: 'S\'inscrire',
   },
+  {
+    link: '/login',
+    title: 'Se connecter',
+  },
+  {
+    link: '/shoppingcard',
+    title: 'Mon panier',
+  }
 ];
 
 const propTypes = {
